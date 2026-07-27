@@ -23,9 +23,9 @@ status: machine
 
 | # | Column | Type | Nullable | Default | Description | Purpose |
 |---|---|---|---|---|---|---|
-| 1 | `month` | `date` | true | — | — | — |
-| 2 | `status` | `text` | true | — | — | — |
-| 3 | `new_subscriptions` | `bigint` | true | — | — | — |
+| 1 | `month` | `date` | true | — | — | First day of the UTC month the subscription record was created in. |
+| 2 | `status` | `text` | true | — | — | Lifecycle status of the record as it stands now, not as it was at creation. Open vocabulary — see Warnings. |
+| 3 | `new_subscriptions` | `bigint` | true | — | — | Subscription records created that month with that current status. |
 
 ## Keys & indexes
 

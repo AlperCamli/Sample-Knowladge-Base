@@ -23,10 +23,10 @@ status: machine
 
 | # | Column | Type | Nullable | Default | Description | Purpose |
 |---|---|---|---|---|---|---|
-| 1 | `changed_day` | `date` | true | — | — | — |
-| 2 | `from_status` | `text` | true | — | — | — |
-| 3 | `to_status` | `text` | true | — | — | — |
-| 4 | `transitions` | `bigint` | true | — | — | — |
+| 1 | `changed_day` | `date` | true | — | — | UTC calendar date the transition was recorded (`job_status_history.changed_at`). |
+| 2 | `from_status` | `text` | true | — | — | Stage the job left; null marks a job's first status entry. Enum in body. |
+| 3 | `to_status` | `text` | true | — | — | Stage the job moved to. Enum in body. |
+| 4 | `transitions` | `bigint` | true | — | — | Transitions recorded that day for this (from, to) pair. |
 
 ## Keys & indexes
 
