@@ -4,6 +4,82 @@
       "columns": [
         {
           "from": [
+            "created_at",
+            "status",
+            "user_id"
+          ],
+          "to": "exported"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:060d2afc4c97d79a69a87676efb3e4ee71eeedaf411b8e508a22de758211fb69",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:14957dd89f9bc0dd12ab1d8275e001bd7346e6b093ee5da1eeb5b71c4fcf6cf8",
+      "operation": "aggregate",
+      "source": "supabase.public.exports",
+      "target": "supabase.reporting.v_activation_funnel_monthly",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [
+            "created_at"
+          ],
+          "to": "cohort_month"
+        },
+        {
+          "from": [
+            "created_at",
+            "id"
+          ],
+          "to": "created_master_cv"
+        },
+        {
+          "from": [
+            "created_at",
+            "id"
+          ],
+          "to": "created_tailored_cv"
+        },
+        {
+          "from": [
+            "created_at",
+            "id"
+          ],
+          "to": "exported"
+        },
+        {
+          "from": [],
+          "to": "signed_up"
+        },
+        {
+          "from": [
+            "created_at",
+            "id"
+          ],
+          "to": "subscribed"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:060d2afc4c97d79a69a87676efb3e4ee71eeedaf411b8e508a22de758211fb69",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:19e24d8b6823f365d3f5e2c895762c1dc645876beecc6a5be766bb96b75e36c6",
+      "operation": "aggregate",
+      "source": "supabase.public.users",
+      "target": "supabase.reporting.v_activation_funnel_monthly",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [
             "user_id"
           ],
           "to": "distinct_users"
@@ -61,6 +137,37 @@
     {
       "columns": [
         {
+          "from": [],
+          "to": "run_count"
+        },
+        {
+          "from": [
+            "started_at"
+          ],
+          "to": "run_day"
+        },
+        {
+          "from": [
+            "status"
+          ],
+          "to": "status"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:206170e81397adb1dc59d803edf7dc6034438ca16e9d3dc36fbe6666f746db69",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:369a83559ef0ac30b82a7b7cac53df2a5eb25f14ff80adb91358dd609725c092",
+      "operation": "aggregate",
+      "source": "supabase.public.ai_runs",
+      "target": "supabase.reporting.v_ai_runs_by_day",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
           "from": [
             "created_at"
           ],
@@ -77,6 +184,28 @@
       "operation": "aggregate",
       "source": "supabase.public.tailored_cvs",
       "target": "supabase.reporting.v_daily_activity",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [
+            "created_at",
+            "user_id"
+          ],
+          "to": "subscribed"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:060d2afc4c97d79a69a87676efb3e4ee71eeedaf411b8e508a22de758211fb69",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:38c0223e589880a2e41fd2dce4c81508a11729dddd8132cb203ca7f429962396",
+      "operation": "aggregate",
+      "source": "supabase.public.subscriptions",
+      "target": "supabase.reporting.v_activation_funnel_monthly",
       "trust": "sql-parse"
     },
     {
@@ -135,6 +264,29 @@
       "operation": "aggregate",
       "source": "supabase.public.jobs",
       "target": "supabase.reporting.v_daily_activity",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [
+            "created_at",
+            "is_deleted",
+            "user_id"
+          ],
+          "to": "created_tailored_cv"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:060d2afc4c97d79a69a87676efb3e4ee71eeedaf411b8e508a22de758211fb69",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:6121966decb09db947f7798785f0666f0f0aee64c91e1df32ada7439db823c8a",
+      "operation": "aggregate",
+      "source": "supabase.public.tailored_cvs",
+      "target": "supabase.reporting.v_activation_funnel_monthly",
       "trust": "sql-parse"
     },
     {
@@ -266,6 +418,54 @@
       "operation": "aggregate",
       "source": "supabase.public.files",
       "target": "supabase.reporting.v_files_by_type",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [],
+          "to": "new_users"
+        },
+        {
+          "from": [
+            "created_at"
+          ],
+          "to": "signup_day"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:f903b4455bb09eee52f5cfe83ca2b976d08c18d36eae50ce80dcd734a7922464",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:9746ef201e734725f9fbc777ac87bb4e89932dfcf82d5685a7e2a8c01c89b640",
+      "operation": "aggregate",
+      "source": "supabase.public.users",
+      "target": "supabase.reporting.v_user_signups_by_day",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [
+            "created_at",
+            "is_deleted",
+            "user_id"
+          ],
+          "to": "created_master_cv"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:060d2afc4c97d79a69a87676efb3e4ee71eeedaf411b8e508a22de758211fb69",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:9abb3b886cc01148d4f41ddd49f4dc372f1c9d7787fc5973b07937f3e7487b7c",
+      "operation": "aggregate",
+      "source": "supabase.public.master_cvs",
+      "target": "supabase.reporting.v_activation_funnel_monthly",
       "trust": "sql-parse"
     },
     {
@@ -432,6 +632,43 @@
       "operation": "aggregate",
       "source": "supabase.public.ai_runs",
       "target": "supabase.reporting.v_ai_tokens_by_month",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [
+            "changed_at"
+          ],
+          "to": "changed_day"
+        },
+        {
+          "from": [
+            "from_status"
+          ],
+          "to": "from_status"
+        },
+        {
+          "from": [
+            "to_status"
+          ],
+          "to": "to_status"
+        },
+        {
+          "from": [],
+          "to": "transitions"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:4bab5afca16d49c660b8b95499ada8b310921be4fd42e2e6dd2519e14fb874c2",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:c9a7b7ce9832910a43ee146f975d0b76112eb88ca97caf5c0e99794fca035628",
+      "operation": "aggregate",
+      "source": "supabase.public.job_status_history",
+      "target": "supabase.reporting.v_job_status_transitions",
       "trust": "sql-parse"
     },
     {
@@ -608,9 +845,40 @@
       "source": "supabase.public.jobs",
       "target": "supabase.reporting.v_jobs_by_status",
       "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [
+            "created_at"
+          ],
+          "to": "month"
+        },
+        {
+          "from": [],
+          "to": "new_subscriptions"
+        },
+        {
+          "from": [
+            "status"
+          ],
+          "to": "status"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:024ac9892cba132465a158294463abe9869d03afe7b24b3f033fc448eaaf550e",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:fa7b29fb16f62c6a19191c978ca916ebdf0a0e2b866240ec9134d5151b40f15a",
+      "operation": "aggregate",
+      "source": "supabase.public.subscriptions",
+      "target": "supabase.reporting.v_subscriptions_new_by_month",
+      "trust": "sql-parse"
     }
   ],
-  "generated_at": "2026-07-20T21:24:54Z",
+  "generated_at": "2026-07-27T11:22:25Z",
   "graph_version": "1",
   "inputs": [
     {
@@ -618,7 +886,7 @@
       "snapshot_ref": {
         "ga4": "sha256:737f0205d50c76329cf820e622cf7c324bb250aa125f106f87c9b28513457d6a",
         "gsc": "sha256:a40d0fab958dd8bbca4502d1a084a2947ee562e9c0fb7c8db402cea016ab836e",
-        "supabase": "sha256:6fcfc976ce104e33ca56a16670d78e57ab44950bdf6ee4b106dad8c20ce3463c"
+        "supabase": "sha256:751998b390479736b738b363f7d03d9af69be3df15e6a7a5acbbd779c4715645"
       }
     }
   ],
@@ -653,6 +921,12 @@
       "resolved": true
     },
     {
+      "doc": "systems/supabase/public/job_status_history.schema.md",
+      "id": "supabase.public.job_status_history",
+      "node_kind": "table",
+      "resolved": true
+    },
+    {
       "doc": "systems/supabase/public/jobs.schema.md",
       "id": "supabase.public.jobs",
       "node_kind": "table",
@@ -680,6 +954,18 @@
       "doc": "systems/supabase/public/users.schema.md",
       "id": "supabase.public.users",
       "node_kind": "table",
+      "resolved": true
+    },
+    {
+      "doc": "systems/supabase/reporting/v_activation_funnel_monthly.schema.md",
+      "id": "supabase.reporting.v_activation_funnel_monthly",
+      "node_kind": "view",
+      "resolved": true
+    },
+    {
+      "doc": "systems/supabase/reporting/v_ai_runs_by_day.schema.md",
+      "id": "supabase.reporting.v_ai_runs_by_day",
+      "node_kind": "view",
       "resolved": true
     },
     {
@@ -725,6 +1011,12 @@
       "resolved": true
     },
     {
+      "doc": "systems/supabase/reporting/v_job_status_transitions.schema.md",
+      "id": "supabase.reporting.v_job_status_transitions",
+      "node_kind": "view",
+      "resolved": true
+    },
+    {
       "doc": "systems/supabase/reporting/v_jobs_by_month.schema.md",
       "id": "supabase.reporting.v_jobs_by_month",
       "node_kind": "view",
@@ -749,8 +1041,20 @@
       "resolved": true
     },
     {
+      "doc": "systems/supabase/reporting/v_subscriptions_new_by_month.schema.md",
+      "id": "supabase.reporting.v_subscriptions_new_by_month",
+      "node_kind": "view",
+      "resolved": true
+    },
+    {
       "doc": "systems/supabase/reporting/v_user_cohorts.schema.md",
       "id": "supabase.reporting.v_user_cohorts",
+      "node_kind": "view",
+      "resolved": true
+    },
+    {
+      "doc": "systems/supabase/reporting/v_user_signups_by_day.schema.md",
+      "id": "supabase.reporting.v_user_signups_by_day",
       "node_kind": "view",
       "resolved": true
     }
