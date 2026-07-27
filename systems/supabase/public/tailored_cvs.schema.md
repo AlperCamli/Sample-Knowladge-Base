@@ -3,7 +3,7 @@ doc_class: machine-object
 object: supabase.public.tailored_cvs
 kind: table
 schema_hash: "sha256:401ae631f9f475a3cbc7c633a68fb3ff98ac5b2d57ab30dafebd271975e95945"
-generated_at: 2026-07-12
+generated_at: 2026-07-25
 source_mode: live
 snapshot_version: "1"
 status: machine
@@ -64,7 +64,7 @@ Indexes:
 
 ## Row estimate & freshness
 
-Row estimate: 86
+Row estimate: 92
 
 Freshness: facts reflect the snapshot recorded in `generated_at` (front-matter).
 
