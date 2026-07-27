@@ -23,9 +23,9 @@ status: machine
 
 | # | Column | Type | Nullable | Default | Description | Purpose |
 |---|---|---|---|---|---|---|
-| 1 | `run_day` | `date` | true | — | — | — |
-| 2 | `status` | `text` | true | — | — | — |
-| 3 | `run_count` | `bigint` | true | — | — | — |
+| 1 | `run_day` | `date` | true | — | — | UTC calendar date the run *started* (`ai_runs.started_at`), not the date it finished. |
+| 2 | `status` | `text` | true | — | — | Run status, DB-constrained to `pending` \| `completed` \| `failed`. Enum in body. |
+| 3 | `run_count` | `bigint` | true | — | — | Runs started that day with that status. |
 
 ## Keys & indexes
 

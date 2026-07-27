@@ -23,12 +23,12 @@ status: machine
 
 | # | Column | Type | Nullable | Default | Description | Purpose |
 |---|---|---|---|---|---|---|
-| 1 | `cohort_month` | `date` | true | — | — | — |
-| 2 | `signed_up` | `bigint` | true | — | — | — |
-| 3 | `created_master_cv` | `bigint` | true | — | — | — |
-| 4 | `created_tailored_cv` | `bigint` | true | — | — | — |
-| 5 | `exported` | `bigint` | true | — | — | — |
-| 6 | `subscribed` | `bigint` | true | — | — | — |
+| 1 | `cohort_month` | `date` | true | — | — | First day of the UTC month the cohort's users signed up in. |
+| 2 | `signed_up` | `bigint` | true | — | — | Users who signed up that month — the cohort size and the funnel's base. |
+| 3 | `created_master_cv` | `bigint` | true | — | — | Cohort users with at least one non-deleted master CV created before the month ended. |
+| 4 | `created_tailored_cv` | `bigint` | true | — | — | Cohort users with at least one non-deleted tailored CV created before the month ended. |
+| 5 | `exported` | `bigint` | true | — | — | Cohort users with at least one completed export created before the month ended. |
+| 6 | `subscribed` | `bigint` | true | — | — | Cohort users with at least one subscription record created before the month ended, at any status. |
 
 ## Keys & indexes
 
