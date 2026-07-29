@@ -1,7 +1,7 @@
 ---
 doc_class: entity
-status: draft
-last_verified: null
+status: verified
+last_verified: 2026-07-29
 aliases: [url, web page, landing page, article]
 maps:
   - { object: "gsc.standard.page",     role: search-identity,    keys: [page] }
@@ -52,8 +52,19 @@ Documented blend key pair — normalize the GSC full URL to a path and match GA4
 `pagePath`:
 
 `path(gsc.standard.page) == ga4.standard.pagePath`, where `path()` = strip
-scheme + host (`jobspecificcv.com`, including any `www.`/subdomain), strip a
-trailing slash, drop `?query` and `#fragment`.
+scheme + host (`jobspecificcv.com`, including any `www.`/subdomain), drop
+`?query` and `#fragment`, then strip a trailing slash **unless that would
+leave the path empty — the site root normalizes to `/`, which is what GA4
+reports**.
+
+> The root carve-out is not a nicety. Search Console returns the homepage as
+> `https://jobspecificcv.com/`; without the exception, `path()` yields the
+> empty string while GA4 reports `/`, and the join silently drops the
+> busiest page on the site (195 views in the 2026-06-29 → 2026-07-27
+> window, over 4× the next page) while returning a tidy-looking result for
+> every other URL. Verified 2026-07-29 against live gateway pulls from both
+> systems: 21 of 21 Search Console pages match with the carve-out, 20 of 21
+> without it.
 
 - The property is single-domain (`sc-domain:jobspecificcv.com`), so host is a
   constant and **path is a safe common key**.
@@ -78,7 +89,10 @@ Prefer the path key — it is the most stable across the two URL shapes.
   dimensions).
 - **Trailing slash / query / case:** GA4 `pagePath` excludes the query string;
   GSC canonical URLs usually have none — but trailing-slash and case
-  differences cause misses, so normalize both sides.
+  differences cause misses, so normalize both sides. In the 2026-07-29
+  verification window neither side carried a query, a fragment, an uppercase
+  character or a `www.` host, and the only trailing slash was the root's
+  (see the rule's carve-out above).
 - **Coverage:** GSC sees only pages that appeared in Search; GA4 sees only
   pages where the tag fired (bots excluded client-side). `(not set)` and
   sampling apply.
