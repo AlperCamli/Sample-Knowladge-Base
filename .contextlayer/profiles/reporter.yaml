@@ -23,9 +23,21 @@ tools:
   # template-link path carries no credentials at all — the exec role's
   # password is entered by a human in the Looker Studio UI, never by an
   # agent, never in a URL.
+  #
+  # `publish_report:powerbi` (CP-7 / M3, amended target) is the same
+  # qualified grant against an api-class publisher: the platform creates
+  # the semantic model and fills it from the artifact's own validated,
+  # reporting-view-backed queries, run through the governed gateway under
+  # this profile's guardrails. The agent still never holds a database
+  # credential — it receives delivered table schemas, not a connection —
+  # and publishing here is a two-call contract: `deliver_model`, then
+  # `attest` only after the deployed report definition has been read back
+  # and verified. Listing this target widens nothing else: any other
+  # target, and any attest without its matching delivery, is denied
+  # server-side and audited.
   allow: [search_context, get_entity, get_table, get_metric, get_lineage,
           validate_sql, execute_sql:supabase, publish_report:looker_studio,
-          report_freshness, flag_gap]
+          publish_report:powerbi, report_freshness, flag_gap]
 context:
   claude_md_fragment: |
     Prefer certified metrics from metrics/. Warn on stale or draft docs;
