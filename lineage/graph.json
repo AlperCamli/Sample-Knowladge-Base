@@ -1,6 +1,19 @@
 {
   "edges": [
     {
+      "evidence": [
+        {
+          "ref": "gateway:8a83dacc-4ba6-473a-9aa3-139d189b21ab",
+          "tier": "pipeline-tool"
+        }
+      ],
+      "id": "sha256:0b288e24ef8dae0a68b82c2131cc5033fe4afd30cef9d22b33585d1588a1734c",
+      "operation": "ingest",
+      "source": "supabase.reporting.v_activation_funnel_monthly",
+      "target": "looker_studio.report.tl-eba78a1d47be392d",
+      "trust": "pipeline-tool"
+    },
+    {
       "columns": [
         {
           "from": [
@@ -209,6 +222,19 @@
       "trust": "sql-parse"
     },
     {
+      "evidence": [
+        {
+          "ref": "gateway:85714a2a-ec7a-4f97-adf3-156cb22281db",
+          "tier": "pipeline-tool"
+        }
+      ],
+      "id": "sha256:3b854ee15651423dc80559549e71255d2703faa1bd000de0fa57c10decf9e914",
+      "operation": "ingest",
+      "source": "supabase.reporting.v_activation_funnel_monthly",
+      "target": "looker_studio.report.tl-409db6e3120ce492",
+      "trust": "pipeline-tool"
+    },
+    {
       "columns": [
         {
           "from": [
@@ -288,6 +314,32 @@
       "source": "supabase.public.tailored_cvs",
       "target": "supabase.reporting.v_activation_funnel_monthly",
       "trust": "sql-parse"
+    },
+    {
+      "evidence": [
+        {
+          "ref": "gateway:7124cbef-0429-4c6c-8e70-fb1f31080f7b",
+          "tier": "pipeline-tool"
+        }
+      ],
+      "id": "sha256:6667b4faef22fbf0597a2f755e1b81b256695fe8be9bcd1d89bf8395bfa53a3c",
+      "operation": "ingest",
+      "source": "supabase.reporting.v_ai_tokens_by_month",
+      "target": "powerbi.report.bae55769-0cb3-41ba-877a-e9cd77a964d8",
+      "trust": "pipeline-tool"
+    },
+    {
+      "evidence": [
+        {
+          "ref": "gateway:7124cbef-0429-4c6c-8e70-fb1f31080f7b",
+          "tier": "pipeline-tool"
+        }
+      ],
+      "id": "sha256:6d1a1dd861020e888a04a52795914cd691acd95f34dc6216b2ce214cc86665fa",
+      "operation": "ingest",
+      "source": "supabase.reporting.v_ai_runs_by_flow",
+      "target": "powerbi.report.bae55769-0cb3-41ba-877a-e9cd77a964d8",
+      "trust": "pipeline-tool"
     },
     {
       "columns": [
@@ -372,6 +424,19 @@
       "trust": "sql-parse"
     },
     {
+      "evidence": [
+        {
+          "ref": "gateway:85714a2a-ec7a-4f97-adf3-156cb22281db",
+          "tier": "pipeline-tool"
+        }
+      ],
+      "id": "sha256:86c6c74afe2b0bd40e3eef53109d347a76038b612ed7a1f0ef17f2a3bf1b9a77",
+      "operation": "ingest",
+      "source": "supabase.reporting.v_user_cohorts",
+      "target": "looker_studio.report.tl-409db6e3120ce492",
+      "trust": "pipeline-tool"
+    },
+    {
       "columns": [
         {
           "from": [
@@ -419,6 +484,19 @@
       "source": "supabase.public.files",
       "target": "supabase.reporting.v_files_by_type",
       "trust": "sql-parse"
+    },
+    {
+      "evidence": [
+        {
+          "ref": "gateway:7124cbef-0429-4c6c-8e70-fb1f31080f7b",
+          "tier": "pipeline-tool"
+        }
+      ],
+      "id": "sha256:963069e0c89116acb0de792e4402d19713a7f70e6ec302533ee83666cc1434c3",
+      "operation": "ingest",
+      "source": "supabase.reporting.v_daily_activity",
+      "target": "powerbi.report.bae55769-0cb3-41ba-877a-e9cd77a964d8",
+      "trust": "pipeline-tool"
     },
     {
       "columns": [
@@ -590,6 +668,19 @@
       "source": "supabase.public.users",
       "target": "supabase.reporting.v_user_cohorts",
       "trust": "sql-parse"
+    },
+    {
+      "evidence": [
+        {
+          "ref": "gateway:54044524-04f9-44d4-8203-581e5e97ccf4",
+          "tier": "pipeline-tool"
+        }
+      ],
+      "id": "sha256:bec30b15cafdcd945126db5f6b774016ff32ec36319083c0ce0b4a9f2a077177",
+      "operation": "ingest",
+      "source": "supabase.reporting.v_user_signups_by_day",
+      "target": "looker_studio.report.tl-4ea06a83615531cd",
+      "trust": "pipeline-tool"
     },
     {
       "columns": [
@@ -888,9 +979,33 @@
         "gsc": "sha256:a40d0fab958dd8bbca4502d1a084a2947ee562e9c0fb7c8db402cea016ab836e",
         "supabase": "sha256:751998b390479736b738b363f7d03d9af69be3df15e6a7a5acbbd779c4715645"
       }
+    },
+    {
+      "attestations": 7,
+      "kind": "gateway"
     }
   ],
   "nodes": [
+    {
+      "id": "looker_studio.report.tl-409db6e3120ce492",
+      "node_kind": "report",
+      "resolved": true
+    },
+    {
+      "id": "looker_studio.report.tl-4ea06a83615531cd",
+      "node_kind": "report",
+      "resolved": true
+    },
+    {
+      "id": "looker_studio.report.tl-eba78a1d47be392d",
+      "node_kind": "report",
+      "resolved": true
+    },
+    {
+      "id": "powerbi.report.bae55769-0cb3-41ba-877a-e9cd77a964d8",
+      "node_kind": "report",
+      "resolved": true
+    },
     {
       "id": "supabase.",
       "node_kind": "external",
