@@ -4,7 +4,13 @@
 # the repo and invoke the host-agnostic entry point below. The
 # validation library arrives as the vendored wheel in .github/vendor/
 # (provenance in VENDOR-MANIFEST.yaml) — no secrets, no network access
-# beyond public PyPI for three pinned runtime deps.
+# beyond public PyPI for the pinned runtime deps.
+#
+# This file carries NO version: the wheel filename and the dep pins are
+# read out of VENDOR-MANIFEST.yaml at job time (platform ruling D-96
+# task 2 / R-6(b)). That is what lets a wheel carry land as a
+# vendor-only commit, so the sync identity's PAT needs no `workflow`
+# write scope. Bumping a wheel means editing the manifest, never this.
 #
 # Entry point:  python -m generator.validate <kb-root>
 # Covers: KB-1 front-matter schemas, KB §3 layout conformance,
@@ -34,9 +40,41 @@ jobs:
           python-version: "3.12"
 
       - name: Install validation library (vendored wheel + pinned deps)
+        # The wheel filename and the runtime pins are read from
+        # .github/vendor/VENDOR-MANIFEST.yaml — this file carries no
+        # version. That is what lets a wheel carry land as a vendor-only
+        # commit, so the sync identity needs no `workflow` write scope
+        # (platform ruling D-96 task 2 / R-6(b), security review #2 F7).
         run: |
-          python -m pip install --no-deps .github/vendor/contextlayer_snapshot-0.5.0-py3-none-any.whl
-          python -m pip install "jsonschema[format-nongpl]==4.26.0" "PyYAML==6.0.3" "jinja2==3.1.6"
+          set -euo pipefail
+          MANIFEST=.github/vendor/VENDOR-MANIFEST.yaml
+
+          WHEEL=$(sed -n 's/^wheel:[[:space:]]*//p' "$MANIFEST")
+          # Only the entries under `runtime_deps:` — scoped, so an
+          # unrelated list added to the manifest later cannot leak in.
+          DEPS=$(awk '/^runtime_deps:/ {f=1; next}
+                      f && /^  - / {sub(/^  - /, ""); print; next}
+                      f {exit}' "$MANIFEST")
+          test -n "$WHEEL" || { echo "::error::$MANIFEST has no wheel: line"; exit 1; }
+          test -n "$DEPS"  || { echo "::error::$MANIFEST lists no runtime_deps:"; exit 1; }
+          echo "wheel: $WHEEL"
+          echo "deps:"; echo "$DEPS" | sed 's/^/  /'
+
+          test -f ".github/vendor/$WHEEL" || {
+            echo "::error::$MANIFEST pins $WHEEL but .github/vendor/$WHEEL is missing"
+            exit 1
+          }
+          # Provenance checked, not assumed: a manifest whose sha256 does
+          # not match the file it names is the D-46 failure mode itself.
+          EXPECTED=$(sed -n 's/^sha256:[[:space:]]*//p' "$MANIFEST")
+          ACTUAL=$(sha256sum ".github/vendor/$WHEEL" | cut -d' ' -f1)
+          test "$EXPECTED" = "$ACTUAL" || {
+            echo "::error::wheel sha256 mismatch — manifest says $EXPECTED, file is $ACTUAL"
+            exit 1
+          }
+
+          python -m pip install --no-deps ".github/vendor/$WHEEL"
+          echo "$DEPS" | xargs python -m pip install
 
       - name: Validate KB
         run: python -m generator.validate .
