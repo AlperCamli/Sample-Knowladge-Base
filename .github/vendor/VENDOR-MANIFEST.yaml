@@ -13,6 +13,19 @@
 # make visible: a stale wheel silently validating against old rules —
 # check platform_commit against the platform repo before trusting a
 # validation pass that "should" have caught something.
+#
+# THIS FILE IS THE ONLY PIN (platform ruling D-96 task 2, R-6 option
+# (b), from security review #2 F7). kb-ci.yml reads `wheel:` and
+# `runtime_deps:` below at job time and installs exactly what it finds,
+# so carrying a wheel never edits a workflow file — and the sync
+# identity's PAT therefore does not need `workflow` write scope. A
+# token that can rewrite CI can rewrite the thing checking its own
+# work; that is not what "contents + pull-request write and nothing
+# else" permits.
+#
+# Editing `wheel:` without adding the matching file under .github/vendor/
+# fails CI loudly on the next run. That is deliberate: a loud failure
+# beats a silent validation against a stale wheel.
 
 package: contextlayer-snapshot
 version: 0.5.0
@@ -22,4 +35,11 @@ platform_commit: f38b75c12753399c6a3b2815e6b58692c3c223de
 built: 2026-07-20
 built_by: contextlayer-sync (sync spec §10 wheel carry)
 source: platform repo (local, no public remote) — DataProject
-runtime_deps_pinned_in: ../workflows/kb-ci.yml
+runtime_deps_pinned_in: this file (runtime_deps)
+
+# Installed with --no-deps alongside the wheel. Pinned exactly; kb-ci.yml
+# reads this list rather than carrying its own copy.
+runtime_deps:
+  - jsonschema[format-nongpl]==4.26.0
+  - PyYAML==6.0.3
+  - jinja2==3.1.6
