@@ -2,7 +2,7 @@
 doc_class: machine-object
 object: supabase.reporting.v_mart_fact_daily
 kind: view
-schema_hash: "sha256:dbc344ec4b5b1e7e43ebcf97ca4261bce7ce9457990af05494c91c0a29ef9351"
+schema_hash: "sha256:a8696c23ef09704d42f087654ae2e293b41cdbb242782f287d087bda409bb6fe"
 generated_at: 2026-08-04
 source_mode: live
 snapshot_version: "1"
@@ -17,7 +17,7 @@ status: machine
 |---|---|
 | Object | `supabase.reporting.v_mart_fact_daily` |
 | Kind | view |
-| Schema hash | `sha256:dbc344ec4b5b1e7e43ebcf97ca4261bce7ce9457990af05494c91c0a29ef9351` |
+| Schema hash | `sha256:a8696c23ef09704d42f087654ae2e293b41cdbb242782f287d087bda409bb6fe` |
 
 ## Columns
 
@@ -81,7 +81,7 @@ Freshness: facts reflect the snapshot recorded in `generated_at` (front-matter).
     COALESCE(ai.ai_pending, 0::numeric) AS ai_pending,
     COALESCE(tr.job_transitions, 0::numeric) AS job_transitions
    FROM reporting.v_daily_activity d
-     LEFT JOIN reporting.v_user_signups_by_day s ON s.signup_day = d.day
+     LEFT JOIN reporting.v_user_signups_by_day s ON s.signup_date = d.day
      LEFT JOIN ai ON ai.run_day = d.day
      LEFT JOIN tr ON tr.changed_day = d.day;
 ```

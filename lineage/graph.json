@@ -484,7 +484,7 @@
       ],
       "evidence": [
         {
-          "ref": "view-def sha256:834a0c8c359b4e257b19fbf2a8cb0a82811e826b2faf2a7da1b137be25292f59",
+          "ref": "view-def sha256:bc37f601a7e37b503e304314479e8416ad66e18a48e885cffd2ea1b744561881",
           "tier": "sql-parse"
         }
       ],
@@ -711,7 +711,7 @@
       ],
       "evidence": [
         {
-          "ref": "view-def sha256:834a0c8c359b4e257b19fbf2a8cb0a82811e826b2faf2a7da1b137be25292f59",
+          "ref": "view-def sha256:bc37f601a7e37b503e304314479e8416ad66e18a48e885cffd2ea1b744561881",
           "tier": "sql-parse"
         }
       ],
@@ -805,7 +805,7 @@
       ],
       "evidence": [
         {
-          "ref": "view-def sha256:834a0c8c359b4e257b19fbf2a8cb0a82811e826b2faf2a7da1b137be25292f59",
+          "ref": "view-def sha256:bc37f601a7e37b503e304314479e8416ad66e18a48e885cffd2ea1b744561881",
           "tier": "sql-parse"
         }
       ],
@@ -933,7 +933,7 @@
       ],
       "evidence": [
         {
-          "ref": "view-def sha256:834a0c8c359b4e257b19fbf2a8cb0a82811e826b2faf2a7da1b137be25292f59",
+          "ref": "view-def sha256:bc37f601a7e37b503e304314479e8416ad66e18a48e885cffd2ea1b744561881",
           "tier": "sql-parse"
         }
       ],
@@ -966,12 +966,12 @@
           "from": [
             "created_at"
           ],
-          "to": "signup_day"
+          "to": "signup_date"
         }
       ],
       "evidence": [
         {
-          "ref": "view-def sha256:f903b4455bb09eee52f5cfe83ca2b976d08c18d36eae50ce80dcd734a7922464",
+          "ref": "view-def sha256:05d7b076de24c0b565e670c3f0f61f5f329a3e03d29f974af46e5ba99a46f323",
           "tier": "sql-parse"
         }
       ],
@@ -1737,7 +1737,7 @@
       "trust": "sql-parse"
     }
   ],
-  "generated_at": "2026-08-04T18:45:58Z",
+  "generated_at": "2026-08-04T18:59:24Z",
   "graph_version": "1",
   "inputs": [
     {
@@ -1745,7 +1745,7 @@
       "snapshot_ref": {
         "ga4": "sha256:737f0205d50c76329cf820e622cf7c324bb250aa125f106f87c9b28513457d6a",
         "gsc": "sha256:a40d0fab958dd8bbca4502d1a084a2947ee562e9c0fb7c8db402cea016ab836e",
-        "supabase": "sha256:4ecf4951b540c00b2b9eccc7f44661dd7d7a178f8394ddff0f1081418ebba8b7"
+        "supabase": "sha256:1bad83a498858410511684feaf7681e87b07d6af2f31f2186a4695989504cc01"
       }
     },
     {
