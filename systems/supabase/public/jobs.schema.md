@@ -2,8 +2,8 @@
 doc_class: machine-object
 object: supabase.public.jobs
 kind: table
-schema_hash: "sha256:36740df1f02513714bd57afb0300ba30312d43cc18c774d1ea5c39703a1f24aa"
-generated_at: 2026-07-12
+schema_hash: "sha256:bc07750f3d955f87a42ed05d09865f43c26328ba940a2c80c3b6b7cf6504a856"
+generated_at: 2026-08-04
 source_mode: live
 snapshot_version: "1"
 status: machine
@@ -17,7 +17,7 @@ status: machine
 |---|---|
 | Object | `supabase.public.jobs` |
 | Kind | table |
-| Schema hash | `sha256:36740df1f02513714bd57afb0300ba30312d43cc18c774d1ea5c39703a1f24aa` |
+| Schema hash | `sha256:bc07750f3d955f87a42ed05d09865f43c26328ba940a2c80c3b6b7cf6504a856` |
 
 ## Columns
 
@@ -61,9 +61,13 @@ Indexes:
 - `CREATE UNIQUE INDEX jobs_unique_cover_letter_idx ON public.jobs USING btree (cover_letter_id) WHERE (cover_letter_id IS NOT NULL)`
 - `CREATE UNIQUE INDEX jobs_unique_tailored_cv_idx ON public.jobs USING btree (tailored_cv_id) WHERE (tailored_cv_id IS NOT NULL)`
 
+Check constraints:
+
+- `CHECK (status = ANY (ARRAY['saved'::text, 'applied'::text, 'interview'::text, 'offer'::text, 'rejected'::text, 'archived'::text]))`
+
 ## Row estimate & freshness
 
-Row estimate: 79
+Row estimate: 102
 
 Freshness: facts reflect the snapshot recorded in `generated_at` (front-matter).
 

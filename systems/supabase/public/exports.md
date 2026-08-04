@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.public.exports
 written_against_schema_hash: "sha256:ab7194cd6d3a1ed8af4c692f1183b3246f1f07c9e115f968bef9cb843f8a5290"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "Export job records for rendering a tailored CV or master CV into a downloadable PDF or DOCX artifact."
 column_purposes:
@@ -27,7 +27,7 @@ depends_on:
   - supabase.public.master_cvs
   - supabase.public.files
   - supabase.public.cv_templates
-contamination: null
+contamination: {object: "supabase.public.exports", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.public.exports`

@@ -2,8 +2,8 @@
 doc_class: machine-object
 object: supabase.public.ai_prompt_configs
 kind: table
-schema_hash: "sha256:2df835a9e26fba31667cdb512f984a9464025f5903ff4b9d7161e2d4f86632b5"
-generated_at: 2026-07-12
+schema_hash: "sha256:9346b889e28062380fae34e5c838e89b2abfbb138452f56de47327ed04bde6ee"
+generated_at: 2026-08-04
 source_mode: live
 snapshot_version: "1"
 status: machine
@@ -17,7 +17,7 @@ status: machine
 |---|---|
 | Object | `supabase.public.ai_prompt_configs` |
 | Kind | table |
-| Schema hash | `sha256:2df835a9e26fba31667cdb512f984a9464025f5903ff4b9d7161e2d4f86632b5` |
+| Schema hash | `sha256:9346b889e28062380fae34e5c838e89b2abfbb138452f56de47327ed04bde6ee` |
 
 ## Columns
 
@@ -49,6 +49,11 @@ Indexes:
 
 - `CREATE INDEX ai_prompt_configs_profile_lookup_idx ON public.ai_prompt_configs USING btree (profile, is_active, flow_type, action_type, provider)`
 - `CREATE UNIQUE INDEX ai_prompt_configs_active_unique_idx ON public.ai_prompt_configs USING btree (profile, flow_type, COALESCE(action_type, ''::text), provider) WHERE (is_active = true)`
+
+Check constraints:
+
+- `CHECK (action_type IS NULL OR (action_type = ANY (ARRAY['rewrite'::text, 'summarize'::text, 'improve'::text, 'ats_optimize'::text, 'options'::text, 'expand'::text, 'shorten'::text])))`
+- `CHECK (flow_type = ANY (ARRAY['job_analysis'::text, 'follow_up_questions'::text, 'tailored_draft'::text, 'block_suggest'::text, 'skills_pool'::text, 'block_compare'::text, 'multi_option'::text, 'import_improve'::text, 'professional_summary'::text, 'summary'::text, 'improve'::text, 'cv_parse'::text, 'cover_letter_generation'::text]))`
 
 ## Row estimate & freshness
 

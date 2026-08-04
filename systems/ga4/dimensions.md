@@ -2,7 +2,7 @@
 doc_class: human-group
 object: ga4.dimensions
 written_against_schema_hash: "sha256:e3cf185f86435cd690116c7d888a3615bb2bf9f8411fe19b0c677ce1790391aa"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "Dimensions available for GA4 reporting on the jobspecificcv property — 375 Google-standard plus one custom (export_status)."
 object_purposes:
@@ -14,7 +14,7 @@ sources:
   - "vendor doc: https://developers.google.com/analytics/devguides/reporting/data/v1/advanced"
 depends_on:
   - supabase.public.exports
-contamination: null
+contamination: {object: "supabase.public.exports", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # ga4 — dimensions

@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.reporting.v_ai_tokens_by_month
 written_against_schema_hash: "sha256:0bd767c407e3273723c4e62a1f96d03fe0d846ba5c8b211ab519010d00535706"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "Monthly AI token spend by provider, with a count of runs that did not complete."
 column_purposes:
@@ -17,7 +17,7 @@ sources:
   - "human doc: supabase.public.ai_runs"
 depends_on:
   - supabase.public.ai_runs
-contamination: null
+contamination: {object: "supabase.public.ai_runs", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.reporting.v_ai_tokens_by_month`

@@ -2,8 +2,8 @@
 doc_class: machine-object
 object: supabase.public.master_cvs
 kind: table
-schema_hash: "sha256:fedbafc33b7a23d0b1fb9c4f646ca486df3265d32a686385ccfbc2790c6de177"
-generated_at: 2026-07-12
+schema_hash: "sha256:36f26160208576eb9cdd4f0a3b707f6d3ff9babf89d2d65622e1ab66d110a273"
+generated_at: 2026-08-04
 source_mode: live
 snapshot_version: "1"
 status: machine
@@ -17,7 +17,7 @@ status: machine
 |---|---|
 | Object | `supabase.public.master_cvs` |
 | Kind | table |
-| Schema hash | `sha256:fedbafc33b7a23d0b1fb9c4f646ca486df3265d32a686385ccfbc2790c6de177` |
+| Schema hash | `sha256:36f26160208576eb9cdd4f0a3b707f6d3ff9babf89d2d65622e1ab66d110a273` |
 
 ## Columns
 
@@ -55,9 +55,13 @@ Indexes:
 - `CREATE INDEX master_cvs_updated_at_idx ON public.master_cvs USING btree (updated_at DESC)`
 - `CREATE INDEX master_cvs_user_id_is_deleted_idx ON public.master_cvs USING btree (user_id, is_deleted)`
 
+Check constraints:
+
+- `CHECK (source_type = ANY (ARRAY['scratch'::text, 'import'::text]))`
+
 ## Row estimate & freshness
 
-Row estimate: 106
+Row estimate: 118
 
 Freshness: facts reflect the snapshot recorded in `generated_at` (front-matter).
 

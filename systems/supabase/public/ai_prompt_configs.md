@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.public.ai_prompt_configs
 written_against_schema_hash: "sha256:2df835a9e26fba31667cdb512f984a9464025f5903ff4b9d7161e2d4f86632b5"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "Configurable prompt records resolved at runtime to supply system/user templates for AI flows by profile, provider, and action."
 column_purposes:
@@ -25,7 +25,7 @@ sources:
   - "machine doc: supabase.public.ai_prompt_configs"
 depends_on:
   - supabase.public.ai_runs
-contamination: null
+contamination: {object: "supabase.public.ai_prompt_configs", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.public.ai_prompt_configs`

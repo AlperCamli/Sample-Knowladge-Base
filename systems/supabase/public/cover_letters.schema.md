@@ -2,8 +2,8 @@
 doc_class: machine-object
 object: supabase.public.cover_letters
 kind: table
-schema_hash: "sha256:26b706a8ef1a9b3285da73e84f0bb741a8df3f659935ff82d893594b29e37a35"
-generated_at: 2026-07-12
+schema_hash: "sha256:d71b0954bbdf7722a0f023e16d40eb78c5b0e4d2f0a4e492d6b5b4c2f9aec015"
+generated_at: 2026-08-04
 source_mode: live
 snapshot_version: "1"
 status: machine
@@ -17,7 +17,7 @@ status: machine
 |---|---|
 | Object | `supabase.public.cover_letters` |
 | Kind | table |
-| Schema hash | `sha256:26b706a8ef1a9b3285da73e84f0bb741a8df3f659935ff82d893594b29e37a35` |
+| Schema hash | `sha256:d71b0954bbdf7722a0f023e16d40eb78c5b0e4d2f0a4e492d6b5b4c2f9aec015` |
 
 ## Columns
 
@@ -54,6 +54,10 @@ Indexes:
 
 - `CREATE INDEX cover_letters_tailored_cv_id_idx ON public.cover_letters USING btree (tailored_cv_id)`
 - `CREATE INDEX cover_letters_user_id_updated_at_idx ON public.cover_letters USING btree (user_id, updated_at DESC)`
+
+Check constraints:
+
+- `CHECK (status = ANY (ARRAY['draft'::text, 'ready'::text, 'archived'::text]))`
 
 ## Row estimate & freshness
 

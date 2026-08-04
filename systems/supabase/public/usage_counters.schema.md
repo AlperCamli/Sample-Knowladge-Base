@@ -2,8 +2,8 @@
 doc_class: machine-object
 object: supabase.public.usage_counters
 kind: table
-schema_hash: "sha256:a4d5722f8765986984bc078fbbc2c86f5d61231eed158555f8036067509b7eee"
-generated_at: 2026-07-27
+schema_hash: "sha256:d6d645c999291cbdac6590455a6beae64eaa7519a9692d293239519458e64393"
+generated_at: 2026-08-04
 source_mode: live
 snapshot_version: "1"
 status: machine
@@ -17,7 +17,7 @@ status: machine
 |---|---|
 | Object | `supabase.public.usage_counters` |
 | Kind | table |
-| Schema hash | `sha256:a4d5722f8765986984bc078fbbc2c86f5d61231eed158555f8036067509b7eee` |
+| Schema hash | `sha256:d6d645c999291cbdac6590455a6beae64eaa7519a9692d293239519458e64393` |
 
 ## Columns
 
@@ -51,9 +51,17 @@ Indexes:
 - `CREATE INDEX usage_counters_period_month_idx ON public.usage_counters USING btree (period_month)`
 - `CREATE INDEX usage_counters_user_id_idx ON public.usage_counters USING btree (user_id)`
 
+Check constraints:
+
+- `CHECK (ai_actions_count >= 0)`
+- `CHECK (exports_count >= 0)`
+- `CHECK (period_month = date_trunc('month'::text, period_month::timestamp with time zone)::date)`
+- `CHECK (storage_bytes_used >= 0)`
+- `CHECK (tailored_cv_generations_count >= 0)`
+
 ## Row estimate & freshness
 
-Row estimate: 39
+Row estimate: 45
 
 Freshness: facts reflect the snapshot recorded in `generated_at` (front-matter).
 

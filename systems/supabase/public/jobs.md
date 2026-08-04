@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.public.jobs
 written_against_schema_hash: "sha256:36740df1f02513714bd57afb0300ba30312d43cc18c774d1ea5c39703a1f24aa"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "Saved job postings a user is tracking, with application status and links to the tailored CV and cover letter for that job."
 column_purposes:
@@ -30,7 +30,7 @@ depends_on:
   - supabase.public.tailored_cvs
   - supabase.public.cover_letters
   - supabase.public.job_status_history
-contamination: null
+contamination: {object: "supabase.public.cover_letters", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.public.jobs`

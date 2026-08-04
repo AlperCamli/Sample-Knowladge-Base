@@ -2,8 +2,8 @@
 doc_class: machine-object
 object: supabase.public.job_status_history
 kind: table
-schema_hash: "sha256:797056ddeef9e10c86890f5cf5a04d894fb0ed069b01b8bbfeb0332d230a8d5a"
-generated_at: 2026-07-12
+schema_hash: "sha256:29df711db43f899a6d767c1a68ef6f404ed78e2667c0d0551adc1d3f61e06e5c"
+generated_at: 2026-08-04
 source_mode: live
 snapshot_version: "1"
 status: machine
@@ -17,7 +17,7 @@ status: machine
 |---|---|
 | Object | `supabase.public.job_status_history` |
 | Kind | table |
-| Schema hash | `sha256:797056ddeef9e10c86890f5cf5a04d894fb0ed069b01b8bbfeb0332d230a8d5a` |
+| Schema hash | `sha256:29df711db43f899a6d767c1a68ef6f404ed78e2667c0d0551adc1d3f61e06e5c` |
 
 ## Columns
 
@@ -47,6 +47,11 @@ Indexes:
 
 - `CREATE INDEX job_status_history_changed_by_user_id_idx ON public.job_status_history USING btree (changed_by_user_id, changed_at DESC)`
 - `CREATE INDEX job_status_history_job_id_changed_at_idx ON public.job_status_history USING btree (job_id, changed_at DESC)`
+
+Check constraints:
+
+- `CHECK ((from_status = ANY (ARRAY['saved'::text, 'applied'::text, 'interview'::text, 'offer'::text, 'rejected'::text, 'archived'::text])) OR from_status IS NULL)`
+- `CHECK (to_status = ANY (ARRAY['saved'::text, 'applied'::text, 'interview'::text, 'offer'::text, 'rejected'::text, 'archived'::text]))`
 
 ## Row estimate & freshness
 

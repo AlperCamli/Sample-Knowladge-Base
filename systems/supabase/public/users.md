@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.public.users
 written_against_schema_hash: "sha256:aefee2abaca5b3f73bf8062903148200a7e8c5df3240b632e65586a1324fdd58"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "Application user accounts mapped to Supabase auth identities; the ownership root every domain table references."
 column_purposes:
@@ -26,7 +26,7 @@ depends_on:
   - supabase.public.tailored_cvs
   - supabase.public.jobs
   - supabase.public.subscriptions
-contamination: null
+contamination: {object: "supabase.public.jobs", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.public.users`

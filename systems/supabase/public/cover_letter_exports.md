@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.public.cover_letter_exports
 written_against_schema_hash: "sha256:4e9e86056fbd97f3a527042842d3e3389b39640933860719b21e914712d85408"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "Export job records for rendering a cover letter into a downloadable PDF or DOCX artifact."
 column_purposes:
@@ -23,7 +23,7 @@ depends_on:
   - supabase.public.users
   - supabase.public.cover_letters
   - supabase.public.files
-contamination: null
+contamination: {object: "supabase.public.cover_letter_exports", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.public.cover_letter_exports`

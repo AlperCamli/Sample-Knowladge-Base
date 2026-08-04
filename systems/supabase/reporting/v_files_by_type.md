@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.reporting.v_files_by_type
 written_against_schema_hash: "sha256:77d8d34973b23250d395f62b03acaea822380965f51458723d76e4a3f6cc6ad2"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "Active file inventory and storage footprint by file type and MIME type."
 column_purposes:
@@ -18,7 +18,7 @@ sources:
   - "human doc: supabase.public.files"
 depends_on:
   - supabase.public.files
-contamination: null
+contamination: {object: "supabase.public.files", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.reporting.v_files_by_type`

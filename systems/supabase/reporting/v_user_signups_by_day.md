@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.reporting.v_user_signups_by_day
 written_against_schema_hash: "sha256:cba88302f11c160a969970b5b4717baa13862a2ca7098bfcdfc504066d0a1da6"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "New user accounts per UTC calendar day — the signup trend series."
 column_purposes:
@@ -14,7 +14,7 @@ sources:
   - "human doc: supabase.public.users"
 depends_on:
   - supabase.public.users
-contamination: null
+contamination: {object: "supabase.public.users", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.reporting.v_user_signups_by_day`

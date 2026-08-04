@@ -2,8 +2,8 @@
 doc_class: machine-object
 object: supabase.public.files
 kind: table
-schema_hash: "sha256:a3a1531959d76aab8a389c584aa353dc06718b96a8df3979de7e3b5ee36c4f7a"
-generated_at: 2026-07-27
+schema_hash: "sha256:f4cb3076102fd20187f53f16f0bd57db712536ee0da9faf8a4887ac77e7e59d3"
+generated_at: 2026-08-04
 source_mode: live
 snapshot_version: "1"
 status: machine
@@ -17,7 +17,7 @@ status: machine
 |---|---|
 | Object | `supabase.public.files` |
 | Kind | table |
-| Schema hash | `sha256:a3a1531959d76aab8a389c584aa353dc06718b96a8df3979de7e3b5ee36c4f7a` |
+| Schema hash | `sha256:f4cb3076102fd20187f53f16f0bd57db712536ee0da9faf8a4887ac77e7e59d3` |
 
 ## Columns
 
@@ -52,6 +52,11 @@ Indexes:
 - `CREATE INDEX files_file_type_idx ON public.files USING btree (file_type)`
 - `CREATE INDEX files_user_id_is_deleted_idx ON public.files USING btree (user_id, is_deleted)`
 - `CREATE UNIQUE INDEX files_bucket_path_unique_idx ON public.files USING btree (storage_bucket, storage_path) WHERE (is_deleted = false)`
+
+Check constraints:
+
+- `CHECK (file_type = ANY (ARRAY['source_upload'::text, 'parsed_artifact'::text, 'export_pdf'::text, 'export_docx'::text, 'avatar'::text, 'other'::text]))`
+- `CHECK (size_bytes >= 0)`
 
 ## Row estimate & freshness
 

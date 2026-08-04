@@ -2,8 +2,8 @@
 doc_class: machine-object
 object: supabase.public.exports
 kind: table
-schema_hash: "sha256:ab7194cd6d3a1ed8af4c692f1183b3246f1f07c9e115f968bef9cb843f8a5290"
-generated_at: 2026-07-12
+schema_hash: "sha256:6c1cbfd40e67c8a748dd664e6087a626315612421b5660eda1f7d3d56c394316"
+generated_at: 2026-08-04
 source_mode: live
 snapshot_version: "1"
 status: machine
@@ -17,7 +17,7 @@ status: machine
 |---|---|
 | Object | `supabase.public.exports` |
 | Kind | table |
-| Schema hash | `sha256:ab7194cd6d3a1ed8af4c692f1183b3246f1f07c9e115f968bef9cb843f8a5290` |
+| Schema hash | `sha256:6c1cbfd40e67c8a748dd664e6087a626315612421b5660eda1f7d3d56c394316` |
 
 ## Columns
 
@@ -57,6 +57,13 @@ Indexes:
 - `CREATE INDEX exports_status_created_at_idx ON public.exports USING btree (status, created_at DESC)`
 - `CREATE INDEX exports_tailored_cv_id_created_at_idx ON public.exports USING btree (tailored_cv_id, created_at DESC)`
 - `CREATE INDEX exports_user_id_created_at_idx ON public.exports USING btree (user_id, created_at DESC)`
+
+Check constraints:
+
+- `CHECK (format = ANY (ARRAY['pdf'::text, 'docx'::text]))`
+- `CHECK (status = 'processing'::text AND file_id IS NULL AND completed_at IS NULL AND error_message IS NULL OR status = 'completed'::text AND file_id IS NOT NULL AND completed_at IS NOT NULL AND error_message IS NULL OR status = 'failed'::text AND file_id IS NULL AND completed_at IS NULL AND error_message IS NOT NULL)`
+- `CHECK (status = ANY (ARRAY['processing'::text, 'completed'::text, 'failed'::text]))`
+- `CHECK (tailored_cv_id IS NOT NULL AND master_cv_id IS NULL OR tailored_cv_id IS NULL AND master_cv_id IS NOT NULL)`
 
 ## Row estimate & freshness
 

@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.reporting.v_jobs_by_status
 written_against_schema_hash: "sha256:8ba1db1fd08c5a3bd5432b0e6e8d9f57d654a01b31ddf3f53c124f4036f9ba80"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "Job-application pipeline size by status: how many tracked postings sit in each stage, over how many users, and the date range each stage spans."
 column_purposes:
@@ -17,7 +17,7 @@ sources:
   - "human doc: supabase.public.jobs"
 depends_on:
   - supabase.public.jobs
-contamination: null
+contamination: {object: "supabase.public.jobs", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.reporting.v_jobs_by_status`
