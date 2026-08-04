@@ -2,7 +2,7 @@
 doc_class: machine-object
 object: supabase.reporting.v_user_signups_by_day
 kind: view
-schema_hash: "sha256:59eaa3b44cc53232cb9e83609a01990fc26dfab632282b59e33473eedd498192"
+schema_hash: "sha256:cba88302f11c160a969970b5b4717baa13862a2ca7098bfcdfc504066d0a1da6"
 generated_at: 2026-08-04
 source_mode: live
 snapshot_version: "1"
@@ -17,13 +17,13 @@ status: machine
 |---|---|
 | Object | `supabase.reporting.v_user_signups_by_day` |
 | Kind | view |
-| Schema hash | `sha256:59eaa3b44cc53232cb9e83609a01990fc26dfab632282b59e33473eedd498192` |
+| Schema hash | `sha256:cba88302f11c160a969970b5b4717baa13862a2ca7098bfcdfc504066d0a1da6` |
 
 ## Columns
 
 | # | Column | Type | Nullable | Default | Description | Purpose |
 |---|---|---|---|---|---|---|
-| 1 | `signup_date` | `date` | true | — | — | UTC calendar date the accounts were created (`users.created_at` converted to UTC, then truncated). |
+| 1 | `signup_day` | `date` | true | — | — | — |
 | 2 | `new_users` | `bigint` | true | — | — | Accounts created on that date. |
 
 ## Keys & indexes
@@ -49,7 +49,7 @@ Freshness: facts reflect the snapshot recorded in `generated_at` (front-matter).
 ## View definition
 
 ```sql
- SELECT (created_at AT TIME ZONE 'UTC'::text)::date AS signup_date,
+ SELECT (created_at AT TIME ZONE 'UTC'::text)::date AS signup_day,
     count(*) AS new_users
    FROM public.users
   GROUP BY ((created_at AT TIME ZONE 'UTC'::text)::date);
