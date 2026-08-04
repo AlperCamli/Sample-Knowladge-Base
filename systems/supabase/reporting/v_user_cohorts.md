@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.reporting.v_user_cohorts
 written_against_schema_hash: "sha256:fd10b9487cd3fb8b73aed002d33d75bf007dcb08ae09d2eb89023d3e223273d1"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "Signup cohort sizes by month, locale and default CV language, with onboarding completion."
 column_purposes:
@@ -17,7 +17,7 @@ sources:
   - "human doc: supabase.public.users"
 depends_on:
   - supabase.public.users
-contamination: null
+contamination: {object: "supabase.public.users", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.reporting.v_user_cohorts`

@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.public.cv_templates
 written_against_schema_hash: "sha256:ed76990d537238d6556cb9e39d4764401203b4840b8e831ecce4a4c9156d327c"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "Catalog of CV templates available for preview rendering and export, identified by slug."
 column_purposes:
@@ -25,7 +25,7 @@ depends_on:
   - supabase.public.master_cvs
   - supabase.public.tailored_cvs
   - supabase.public.exports
-contamination: null
+contamination: {object: "supabase.public.exports", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.public.cv_templates`

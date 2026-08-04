@@ -2,8 +2,8 @@
 doc_class: machine-object
 object: supabase.public.ai_runs
 kind: table
-schema_hash: "sha256:1371cc0551146b3167888b67d16ddbf8c054f90222a4cb07b3312d9a18a89497"
-generated_at: 2026-07-27
+schema_hash: "sha256:a1d393bf52a05c21597853ebf1a04de62392198342bb2a85f6c736590e258b3c"
+generated_at: 2026-08-04
 source_mode: live
 snapshot_version: "1"
 status: machine
@@ -17,7 +17,7 @@ status: machine
 |---|---|
 | Object | `supabase.public.ai_runs` |
 | Kind | table |
-| Schema hash | `sha256:1371cc0551146b3167888b67d16ddbf8c054f90222a4cb07b3312d9a18a89497` |
+| Schema hash | `sha256:a1d393bf52a05c21597853ebf1a04de62392198342bb2a85f6c736590e258b3c` |
 
 ## Columns
 
@@ -66,9 +66,16 @@ Indexes:
 - `CREATE INDEX ai_runs_user_started_at_idx ON public.ai_runs USING btree (user_id, started_at DESC)`
 - `CREATE INDEX ai_runs_user_status_progress_idx ON public.ai_runs USING btree (user_id, status, progress_stage, started_at DESC)`
 
+Check constraints:
+
+- `CHECK (flow_type = ANY (ARRAY['job_analysis'::text, 'follow_up_questions'::text, 'tailored_draft'::text, 'block_suggest'::text, 'skills_pool'::text, 'block_compare'::text, 'multi_option'::text, 'import_improve'::text, 'professional_summary'::text, 'summary'::text, 'improve'::text, 'cv_parse'::text, 'cover_letter_generation'::text]))`
+- `CHECK (progress_stage = ANY (ARRAY['queued'::text, 'building_prompt'::text, 'calling_model'::text, 'parsing_output'::text, 'validating_output'::text, 'persisting_result'::text, 'completed'::text, 'failed'::text]))`
+- `CHECK (status = 'pending'::text AND completed_at IS NULL OR (status = ANY (ARRAY['completed'::text, 'failed'::text])) AND completed_at IS NOT NULL)`
+- `CHECK (status = ANY (ARRAY['pending'::text, 'completed'::text, 'failed'::text]))`
+
 ## Row estimate & freshness
 
-Row estimate: 530
+Row estimate: 666
 
 Freshness: facts reflect the snapshot recorded in `generated_at` (front-matter).
 

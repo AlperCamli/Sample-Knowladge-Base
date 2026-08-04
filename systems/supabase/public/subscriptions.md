@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.public.subscriptions
 written_against_schema_hash: "sha256:aa2bf4a4a88ec655bbb5e0ff78af326ac6c5f20da62f6803cfaa4940fb8c5972"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "Billing subscription records linking a user to an external payment-provider plan and its lifecycle state."
 column_purposes:
@@ -24,7 +24,7 @@ sources:
   - "machine doc: supabase.public.subscriptions"
 depends_on:
   - supabase.public.users
-contamination: null
+contamination: {object: "supabase.public.users", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.public.subscriptions`

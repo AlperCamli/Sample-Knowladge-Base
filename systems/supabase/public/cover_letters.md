@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.public.cover_letters
 written_against_schema_hash: "sha256:26b706a8ef1a9b3285da73e84f0bb741a8df3f659935ff82d893594b29e37a35"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "Cover letter content authored or generated for a specific tracked job, optionally linked to a tailored CV."
 column_purposes:
@@ -25,7 +25,7 @@ depends_on:
   - supabase.public.jobs
   - supabase.public.tailored_cvs
   - supabase.public.cover_letter_exports
-contamination: null
+contamination: {object: "supabase.public.cover_letter_exports", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.public.cover_letters`

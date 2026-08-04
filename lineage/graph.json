@@ -1,6 +1,161 @@
 {
   "edges": [
     {
+      "columns": [
+        {
+          "from": [],
+          "to": "cancelling_count"
+        },
+        {
+          "from": [],
+          "to": "dim"
+        },
+        {
+          "from": [
+            "import_count"
+          ],
+          "to": "item_count"
+        },
+        {
+          "from": [
+            "parser_name"
+          ],
+          "to": "key1"
+        },
+        {
+          "from": [
+            "status"
+          ],
+          "to": "key2"
+        },
+        {
+          "from": [],
+          "to": "total_bytes"
+        },
+        {
+          "from": [
+            "distinct_users"
+          ],
+          "to": "user_count"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:fc87d67ae69633185edd060fc8e1a03046c46c2caa972d0b94de881360ded1f5",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:075951cb8ddd8b4b2e81ce9b27df733a647a8fa0b509d83fe322c50ec7bee620",
+      "operation": "derive",
+      "source": "supabase.reporting.v_imports_by_parser",
+      "target": "supabase.reporting.v_mart_dim_breakouts",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [],
+          "to": "cancelling_count"
+        },
+        {
+          "from": [],
+          "to": "dim"
+        },
+        {
+          "from": [
+            "file_count"
+          ],
+          "to": "item_count"
+        },
+        {
+          "from": [
+            "file_type"
+          ],
+          "to": "key1"
+        },
+        {
+          "from": [
+            "mime_type"
+          ],
+          "to": "key2"
+        },
+        {
+          "from": [
+            "total_bytes"
+          ],
+          "to": "total_bytes"
+        },
+        {
+          "from": [
+            "distinct_users"
+          ],
+          "to": "user_count"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:fc87d67ae69633185edd060fc8e1a03046c46c2caa972d0b94de881360ded1f5",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:085fd75ea66044596ccf1a36962c567ebeaa16572a0da5c80f0f2dd10871173b",
+      "operation": "derive",
+      "source": "supabase.reporting.v_files_by_type",
+      "target": "supabase.reporting.v_mart_dim_breakouts",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [],
+          "to": "cancelling_count"
+        },
+        {
+          "from": [],
+          "to": "dim"
+        },
+        {
+          "from": [
+            "master_cv_count"
+          ],
+          "to": "item_count"
+        },
+        {
+          "from": [
+            "language"
+          ],
+          "to": "key1"
+        },
+        {
+          "from": [
+            "source_type"
+          ],
+          "to": "key2"
+        },
+        {
+          "from": [],
+          "to": "total_bytes"
+        },
+        {
+          "from": [
+            "distinct_users"
+          ],
+          "to": "user_count"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:fc87d67ae69633185edd060fc8e1a03046c46c2caa972d0b94de881360ded1f5",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:0a7fda4a443e41fedcf0b706ff2abad5f9089b2a9ca7b9ca61097f921c885c1f",
+      "operation": "derive",
+      "source": "supabase.reporting.v_master_cvs_by_language",
+      "target": "supabase.reporting.v_mart_dim_breakouts",
+      "trust": "sql-parse"
+    },
+    {
       "evidence": [
         {
           "ref": "gateway:8a83dacc-4ba6-473a-9aa3-139d189b21ab",
@@ -11,6 +166,19 @@
       "operation": "ingest",
       "source": "supabase.reporting.v_activation_funnel_monthly",
       "target": "looker_studio.report.tl-eba78a1d47be392d",
+      "trust": "pipeline-tool"
+    },
+    {
+      "evidence": [
+        {
+          "ref": "gateway:56b35a46-c28e-4aa0-819b-6e881496a203",
+          "tier": "pipeline-tool"
+        }
+      ],
+      "id": "sha256:0e3ac6631b7f4aab67354ddc5b5cb659c88820dea9578b9d1be81aab6a99b36a",
+      "operation": "ingest",
+      "source": "supabase.reporting.v_ai_tokens_by_month",
+      "target": "powerbi.report.117b1491-2a97-4e6d-905f-fbcac1a2492e",
       "trust": "pipeline-tool"
     },
     {
@@ -293,6 +461,85 @@
       "trust": "sql-parse"
     },
     {
+      "evidence": [
+        {
+          "ref": "gateway:56b35a46-c28e-4aa0-819b-6e881496a203",
+          "tier": "pipeline-tool"
+        }
+      ],
+      "id": "sha256:49bec670d32448c3342ee2a610386f2d0ea1b023d31474383a40ff54fd1c7501",
+      "operation": "ingest",
+      "source": "supabase.reporting.v_ai_runs_by_flow",
+      "target": "powerbi.report.117b1491-2a97-4e6d-905f-fbcac1a2492e",
+      "trust": "pipeline-tool"
+    },
+    {
+      "columns": [
+        {
+          "from": [
+            "transitions"
+          ],
+          "to": "job_transitions"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:834a0c8c359b4e257b19fbf2a8cb0a82811e826b2faf2a7da1b137be25292f59",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:4d15d1acde8eb3c3aec4c1ddaea52e408e9587b5397cdff62695cbbee88c5c9f",
+      "operation": "aggregate",
+      "source": "supabase.reporting.v_job_status_transitions",
+      "target": "supabase.reporting.v_mart_fact_daily",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [
+            "created_master_cv"
+          ],
+          "to": "created_master_cv"
+        },
+        {
+          "from": [
+            "created_tailored_cv"
+          ],
+          "to": "created_tailored_cv"
+        },
+        {
+          "from": [
+            "exported"
+          ],
+          "to": "exported"
+        },
+        {
+          "from": [
+            "signed_up"
+          ],
+          "to": "signed_up"
+        },
+        {
+          "from": [
+            "subscribed"
+          ],
+          "to": "subscribed"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:4137e605393a5bdc014f8d668566f37ff6cc66a0f19469a48a1e4037491b0974",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:5a4bd2c2d315c4d59a58c2378e5f2288a760079e3e5a55c2e31a83eaa5041209",
+      "operation": "aggregate",
+      "source": "supabase.reporting.v_activation_funnel_monthly",
+      "target": "supabase.reporting.v_mart_fact_monthly",
+      "trust": "sql-parse"
+    },
+    {
       "columns": [
         {
           "from": [
@@ -327,6 +574,57 @@
       "source": "supabase.reporting.v_ai_tokens_by_month",
       "target": "powerbi.report.bae55769-0cb3-41ba-877a-e9cd77a964d8",
       "trust": "pipeline-tool"
+    },
+    {
+      "columns": [
+        {
+          "from": [],
+          "to": "cancelling_count"
+        },
+        {
+          "from": [],
+          "to": "dim"
+        },
+        {
+          "from": [
+            "export_count"
+          ],
+          "to": "item_count"
+        },
+        {
+          "from": [
+            "format"
+          ],
+          "to": "key1"
+        },
+        {
+          "from": [
+            "status"
+          ],
+          "to": "key2"
+        },
+        {
+          "from": [],
+          "to": "total_bytes"
+        },
+        {
+          "from": [
+            "distinct_users"
+          ],
+          "to": "user_count"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:fc87d67ae69633185edd060fc8e1a03046c46c2caa972d0b94de881360ded1f5",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:6a3eb9f018c3e90a44054c9a1795859e6b1ce396d30fa011de24c2e92956f09e",
+      "operation": "derive",
+      "source": "supabase.reporting.v_exports_by_format",
+      "target": "supabase.reporting.v_mart_dim_breakouts",
+      "trust": "sql-parse"
     },
     {
       "evidence": [
@@ -376,6 +674,51 @@
       "operation": "aggregate",
       "source": "supabase.public.jobs",
       "target": "supabase.reporting.v_jobs_by_month",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [
+            "ai_runs_started"
+          ],
+          "to": "ai_runs_started"
+        },
+        {
+          "from": [
+            "cvs_tailored"
+          ],
+          "to": "cvs_tailored"
+        },
+        {
+          "from": [
+            "day"
+          ],
+          "to": "day"
+        },
+        {
+          "from": [
+            "exports_created"
+          ],
+          "to": "exports_created"
+        },
+        {
+          "from": [
+            "jobs_created"
+          ],
+          "to": "jobs_created"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:834a0c8c359b4e257b19fbf2a8cb0a82811e826b2faf2a7da1b137be25292f59",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:795319e55070ae0ca4d402f6e87eceb444c2f860d9f8ee9384112bc7c00c0dc9",
+      "operation": "aggregate",
+      "source": "supabase.reporting.v_daily_activity",
+      "target": "supabase.reporting.v_mart_fact_daily",
       "trust": "sql-parse"
     },
     {
@@ -440,6 +783,100 @@
       "columns": [
         {
           "from": [
+            "run_count",
+            "status"
+          ],
+          "to": "ai_completed"
+        },
+        {
+          "from": [
+            "run_count",
+            "status"
+          ],
+          "to": "ai_failed"
+        },
+        {
+          "from": [
+            "run_count",
+            "status"
+          ],
+          "to": "ai_pending"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:834a0c8c359b4e257b19fbf2a8cb0a82811e826b2faf2a7da1b137be25292f59",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:8ade438c62c4b8eb8044f25eebc154322e14415e688afb6a513e934ed9bbb9ce",
+      "operation": "aggregate",
+      "source": "supabase.reporting.v_ai_runs_by_day",
+      "target": "supabase.reporting.v_mart_fact_daily",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [
+            "ai_runs_started",
+            "cvs_tailored",
+            "exports_created",
+            "jobs_created"
+          ],
+          "to": "active_days"
+        },
+        {
+          "from": [
+            "ai_runs_started"
+          ],
+          "to": "ai_runs_started"
+        },
+        {
+          "from": [
+            "cvs_tailored"
+          ],
+          "to": "cvs_tailored"
+        },
+        {
+          "from": [],
+          "to": "days_in_month"
+        },
+        {
+          "from": [
+            "exports_created"
+          ],
+          "to": "exports_created"
+        },
+        {
+          "from": [
+            "jobs_created"
+          ],
+          "to": "jobs_created"
+        },
+        {
+          "from": [
+            "day"
+          ],
+          "to": "month"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:4137e605393a5bdc014f8d668566f37ff6cc66a0f19469a48a1e4037491b0974",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:9079693a477b0f72ccaa781f41e4071fe42148cc7a1681b97f193d03c55db709",
+      "operation": "aggregate",
+      "source": "supabase.reporting.v_daily_activity",
+      "target": "supabase.reporting.v_mart_fact_monthly",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [
             "size_bytes"
           ],
           "to": "avg_bytes"
@@ -486,6 +923,27 @@
       "trust": "sql-parse"
     },
     {
+      "columns": [
+        {
+          "from": [
+            "new_users"
+          ],
+          "to": "new_users"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:834a0c8c359b4e257b19fbf2a8cb0a82811e826b2faf2a7da1b137be25292f59",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:95be3fbdfc6e3b265dd61995cea01e6982f6f46599038e9f8894044ca0ce82dc",
+      "operation": "aggregate",
+      "source": "supabase.reporting.v_user_signups_by_day",
+      "target": "supabase.reporting.v_mart_fact_daily",
+      "trust": "sql-parse"
+    },
+    {
       "evidence": [
         {
           "ref": "gateway:7124cbef-0429-4c6c-8e70-fb1f31080f7b",
@@ -521,6 +979,55 @@
       "operation": "aggregate",
       "source": "supabase.public.users",
       "target": "supabase.reporting.v_user_signups_by_day",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [],
+          "to": "cancelling_count"
+        },
+        {
+          "from": [],
+          "to": "dim"
+        },
+        {
+          "from": [
+            "job_count"
+          ],
+          "to": "item_count"
+        },
+        {
+          "from": [
+            "status"
+          ],
+          "to": "key1"
+        },
+        {
+          "from": [],
+          "to": "key2"
+        },
+        {
+          "from": [],
+          "to": "total_bytes"
+        },
+        {
+          "from": [
+            "distinct_users"
+          ],
+          "to": "user_count"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:fc87d67ae69633185edd060fc8e1a03046c46c2caa972d0b94de881360ded1f5",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:9974c0e2dcba4899bdff553bcc0f21075d967550f9a256f1a89160ecba9ec495",
+      "operation": "derive",
+      "source": "supabase.reporting.v_jobs_by_status",
+      "target": "supabase.reporting.v_mart_dim_breakouts",
       "trust": "sql-parse"
     },
     {
@@ -630,6 +1137,60 @@
       "columns": [
         {
           "from": [
+            "applied_count"
+          ],
+          "to": "applied_count"
+        },
+        {
+          "from": [
+            "job_count"
+          ],
+          "to": "job_count"
+        },
+        {
+          "from": [
+            "distinct_users"
+          ],
+          "to": "job_users"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:4137e605393a5bdc014f8d668566f37ff6cc66a0f19469a48a1e4037491b0974",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:b20b4a0ab832060420b33ac1ba0dd04c75fbf913b1709e90ba075a1c7ca26947",
+      "operation": "aggregate",
+      "source": "supabase.reporting.v_jobs_by_month",
+      "target": "supabase.reporting.v_mart_fact_monthly",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [
+            "new_subscriptions"
+          ],
+          "to": "new_subscriptions"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:4137e605393a5bdc014f8d668566f37ff6cc66a0f19469a48a1e4037491b0974",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:b356d74429ad78989bc5e83730f301a3576625bbb462d6aced70eab0d0ae6295",
+      "operation": "aggregate",
+      "source": "supabase.reporting.v_subscriptions_new_by_month",
+      "target": "supabase.reporting.v_mart_fact_monthly",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [
             "default_cv_language"
           ],
           "to": "default_cv_language"
@@ -729,6 +1290,33 @@
       "columns": [
         {
           "from": [
+            "user_count"
+          ],
+          "to": "cohort_users"
+        },
+        {
+          "from": [
+            "onboarded_count"
+          ],
+          "to": "onboarded"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:4137e605393a5bdc014f8d668566f37ff6cc66a0f19469a48a1e4037491b0974",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:c35cd86c4b71a9c5d5c810de475725d390fc26ffb6abfb542c8226f8b0c1ca55",
+      "operation": "aggregate",
+      "source": "supabase.reporting.v_user_cohorts",
+      "target": "supabase.reporting.v_mart_fact_monthly",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [
             "changed_at"
           ],
           "to": "changed_day"
@@ -760,6 +1348,81 @@
       "operation": "aggregate",
       "source": "supabase.public.job_status_history",
       "target": "supabase.reporting.v_job_status_transitions",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [
+            "avg_seconds"
+          ],
+          "to": "avg_seconds"
+        },
+        {
+          "from": [
+            "distinct_users"
+          ],
+          "to": "distinct_users"
+        },
+        {
+          "from": [
+            "flow_type"
+          ],
+          "to": "flow_type"
+        },
+        {
+          "from": [
+            "input_tokens"
+          ],
+          "to": "input_tokens"
+        },
+        {
+          "from": [
+            "model_name"
+          ],
+          "to": "model_name"
+        },
+        {
+          "from": [
+            "output_tokens"
+          ],
+          "to": "output_tokens"
+        },
+        {
+          "from": [
+            "provider"
+          ],
+          "to": "provider"
+        },
+        {
+          "from": [
+            "run_count"
+          ],
+          "to": "run_count"
+        },
+        {
+          "from": [
+            "status"
+          ],
+          "to": "status"
+        },
+        {
+          "from": [
+            "total_tokens"
+          ],
+          "to": "total_tokens"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:f891a45c977fd175612ca59b4896c0f71aed82aa36c7d6c0656f9a606596b0ca",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:cad4a4dc456da84d710f8a3deeb1d04dcdf8d9a4e3d78779745b1e256961ece1",
+      "operation": "rename",
+      "source": "supabase.reporting.v_ai_runs_by_flow",
+      "target": "supabase.reporting.v_mart_dim_ai_flow",
       "trust": "sql-parse"
     },
     {
@@ -861,6 +1524,33 @@
       "columns": [
         {
           "from": [
+            "non_completed_count"
+          ],
+          "to": "ai_non_completed"
+        },
+        {
+          "from": [
+            "total_tokens"
+          ],
+          "to": "total_tokens"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:4137e605393a5bdc014f8d668566f37ff6cc66a0f19469a48a1e4037491b0974",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:e5875b3096044979a2946c2adaf602dae19353f1a1a2d18a3013aa6e49c5ec5e",
+      "operation": "aggregate",
+      "source": "supabase.reporting.v_ai_tokens_by_month",
+      "target": "supabase.reporting.v_mart_fact_monthly",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [
             "user_id"
           ],
           "to": "distinct_users"
@@ -892,6 +1582,57 @@
       "operation": "aggregate",
       "source": "supabase.public.exports",
       "target": "supabase.reporting.v_exports_by_format",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [
+            "cancelling_count"
+          ],
+          "to": "cancelling_count"
+        },
+        {
+          "from": [],
+          "to": "dim"
+        },
+        {
+          "from": [
+            "subscription_count"
+          ],
+          "to": "item_count"
+        },
+        {
+          "from": [
+            "plan_code"
+          ],
+          "to": "key1"
+        },
+        {
+          "from": [
+            "status"
+          ],
+          "to": "key2"
+        },
+        {
+          "from": [],
+          "to": "total_bytes"
+        },
+        {
+          "from": [],
+          "to": "user_count"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:fc87d67ae69633185edd060fc8e1a03046c46c2caa972d0b94de881360ded1f5",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:f1e682503ac86b75f5f8dbb67a2f9c4d937288b8c99a4f84a7cad50ce6544244",
+      "operation": "derive",
+      "source": "supabase.reporting.v_subscriptions_by_plan",
+      "target": "supabase.reporting.v_mart_dim_breakouts",
       "trust": "sql-parse"
     },
     {
@@ -941,6 +1682,33 @@
       "columns": [
         {
           "from": [
+            "tailored_cv_count"
+          ],
+          "to": "tailored_cvs"
+        },
+        {
+          "from": [
+            "deleted_count"
+          ],
+          "to": "tailored_deleted"
+        }
+      ],
+      "evidence": [
+        {
+          "ref": "view-def sha256:4137e605393a5bdc014f8d668566f37ff6cc66a0f19469a48a1e4037491b0974",
+          "tier": "sql-parse"
+        }
+      ],
+      "id": "sha256:fa354ed1c391d119ac8cc36cdde8fd1ec47b5de88402713c08efa68465c7f413",
+      "operation": "aggregate",
+      "source": "supabase.reporting.v_cv_production",
+      "target": "supabase.reporting.v_mart_fact_monthly",
+      "trust": "sql-parse"
+    },
+    {
+      "columns": [
+        {
+          "from": [
             "created_at"
           ],
           "to": "month"
@@ -969,7 +1737,7 @@
       "trust": "sql-parse"
     }
   ],
-  "generated_at": "2026-07-27T11:22:25Z",
+  "generated_at": "2026-08-04T18:05:56Z",
   "graph_version": "1",
   "inputs": [
     {
@@ -977,11 +1745,11 @@
       "snapshot_ref": {
         "ga4": "sha256:737f0205d50c76329cf820e622cf7c324bb250aa125f106f87c9b28513457d6a",
         "gsc": "sha256:a40d0fab958dd8bbca4502d1a084a2947ee562e9c0fb7c8db402cea016ab836e",
-        "supabase": "sha256:751998b390479736b738b363f7d03d9af69be3df15e6a7a5acbbd779c4715645"
+        "supabase": "sha256:4ecf4951b540c00b2b9eccc7f44661dd7d7a178f8394ddff0f1081418ebba8b7"
       }
     },
     {
-      "attestations": 7,
+      "attestations": 9,
       "kind": "gateway"
     }
   ],
@@ -998,6 +1766,11 @@
     },
     {
       "id": "looker_studio.report.tl-eba78a1d47be392d",
+      "node_kind": "report",
+      "resolved": true
+    },
+    {
+      "id": "powerbi.report.117b1491-2a97-4e6d-905f-fbcac1a2492e",
       "node_kind": "report",
       "resolved": true
     },
@@ -1140,6 +1913,30 @@
     {
       "doc": "systems/supabase/reporting/v_jobs_by_status.schema.md",
       "id": "supabase.reporting.v_jobs_by_status",
+      "node_kind": "view",
+      "resolved": true
+    },
+    {
+      "doc": "systems/supabase/reporting/v_mart_dim_ai_flow.schema.md",
+      "id": "supabase.reporting.v_mart_dim_ai_flow",
+      "node_kind": "view",
+      "resolved": true
+    },
+    {
+      "doc": "systems/supabase/reporting/v_mart_dim_breakouts.schema.md",
+      "id": "supabase.reporting.v_mart_dim_breakouts",
+      "node_kind": "view",
+      "resolved": true
+    },
+    {
+      "doc": "systems/supabase/reporting/v_mart_fact_daily.schema.md",
+      "id": "supabase.reporting.v_mart_fact_daily",
+      "node_kind": "view",
+      "resolved": true
+    },
+    {
+      "doc": "systems/supabase/reporting/v_mart_fact_monthly.schema.md",
+      "id": "supabase.reporting.v_mart_fact_monthly",
       "node_kind": "view",
       "resolved": true
     },

@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.public.job_status_history
 written_against_schema_hash: "sha256:797056ddeef9e10c86890f5cf5a04d894fb0ed069b01b8bbfeb0332d230a8d5a"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "Append-only log of status transitions for a job application, attributing each change to a user."
 column_purposes:
@@ -19,7 +19,7 @@ sources:
 depends_on:
   - supabase.public.jobs
   - supabase.public.users
-contamination: null
+contamination: {object: "supabase.public.job_status_history", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.public.job_status_history`

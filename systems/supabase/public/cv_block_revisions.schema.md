@@ -2,8 +2,8 @@
 doc_class: machine-object
 object: supabase.public.cv_block_revisions
 kind: table
-schema_hash: "sha256:3a1278bd5ecfd1421d8e528690c056db43cf2a1beefe7af00752ac1858e98415"
-generated_at: 2026-07-12
+schema_hash: "sha256:c8046383e4bded24ae52ba2745b4ea83b2369d9011cd6c2955cfe047a2cfda66"
+generated_at: 2026-08-04
 source_mode: live
 snapshot_version: "1"
 status: machine
@@ -17,7 +17,7 @@ status: machine
 |---|---|
 | Object | `supabase.public.cv_block_revisions` |
 | Kind | table |
-| Schema hash | `sha256:3a1278bd5ecfd1421d8e528690c056db43cf2a1beefe7af00752ac1858e98415` |
+| Schema hash | `sha256:c8046383e4bded24ae52ba2745b4ea83b2369d9011cd6c2955cfe047a2cfda66` |
 
 ## Columns
 
@@ -60,6 +60,13 @@ Indexes:
 - `CREATE INDEX cv_block_revisions_user_created_at_idx ON public.cv_block_revisions USING btree (user_id, created_at DESC)`
 - `CREATE UNIQUE INDEX cv_block_revisions_master_unique_revision_idx ON public.cv_block_revisions USING btree (master_cv_id, block_id, revision_number) WHERE ((cv_kind = 'master'::text) AND (master_cv_id IS NOT NULL))`
 - `CREATE UNIQUE INDEX cv_block_revisions_tailored_unique_revision_idx ON public.cv_block_revisions USING btree (tailored_cv_id, block_id, revision_number) WHERE ((cv_kind = 'tailored'::text) AND (tailored_cv_id IS NOT NULL))`
+
+Check constraints:
+
+- `CHECK (change_source = ANY (ARRAY['manual'::text, 'ai'::text, 'import'::text, 'restore'::text, 'system'::text]))`
+- `CHECK (cv_kind = 'master'::text AND master_cv_id IS NOT NULL AND tailored_cv_id IS NULL OR cv_kind = 'tailored'::text AND tailored_cv_id IS NOT NULL AND master_cv_id IS NULL)`
+- `CHECK (cv_kind = ANY (ARRAY['master'::text, 'tailored'::text]))`
+- `CHECK (revision_number > 0)`
 
 ## Row estimate & freshness
 

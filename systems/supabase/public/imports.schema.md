@@ -2,8 +2,8 @@
 doc_class: machine-object
 object: supabase.public.imports
 kind: table
-schema_hash: "sha256:637c57a9477ce54183d6f23df56a09c439bdf16333457573c081240d565ac026"
-generated_at: 2026-07-20
+schema_hash: "sha256:2ce8cbca259d1dc0b98220ad5c7d604912fa23f7c4f4e96b10f212d5b4f96d8c"
+generated_at: 2026-08-04
 source_mode: live
 snapshot_version: "1"
 status: machine
@@ -17,7 +17,7 @@ status: machine
 |---|---|
 | Object | `supabase.public.imports` |
 | Kind | table |
-| Schema hash | `sha256:637c57a9477ce54183d6f23df56a09c439bdf16333457573c081240d565ac026` |
+| Schema hash | `sha256:2ce8cbca259d1dc0b98220ad5c7d604912fa23f7c4f4e96b10f212d5b4f96d8c` |
 
 ## Columns
 
@@ -56,9 +56,13 @@ Indexes:
 - `CREATE INDEX imports_target_master_cv_id_idx ON public.imports USING btree (target_master_cv_id)`
 - `CREATE INDEX imports_user_id_status_idx ON public.imports USING btree (user_id, status)`
 
+Check constraints:
+
+- `CHECK (status = ANY (ARRAY['uploaded'::text, 'parsing'::text, 'parsed'::text, 'reviewed'::text, 'converted'::text, 'failed'::text]))`
+
 ## Row estimate & freshness
 
-Row estimate: 102
+Row estimate: 114
 
 Freshness: facts reflect the snapshot recorded in `generated_at` (front-matter).
 
