@@ -28,17 +28,14 @@
 # beats a silent validation against a stale wheel.
 
 package: contextlayer-snapshot
-version: 0.5.0
-wheel: contextlayer_snapshot-0.5.0-py3-none-any.whl
-sha256: 88b9650613325319a414736bc2f744004390568208c76325ca0327bfdc7df394
-platform_commit: f38b75c12753399c6a3b2815e6b58692c3c223de
-built: 2026-07-20
+version: 0.6.0
+wheel: contextlayer_snapshot-0.6.0-py3-none-any.whl
+sha256: 68f55560837bf7acab2be0c49f8c1ce9ef0fc1c71bbd9b5ea5e2c43db18c4614
+platform_commit: e5d2f51a6e841b0720525d8c646399590aad2035
+built: 2026-07-31
 built_by: contextlayer-sync (sync spec §10 wheel carry)
 source: platform repo (local, no public remote) — DataProject
 runtime_deps_pinned_in: this file (runtime_deps)
-
-# Installed with --no-deps alongside the wheel. Pinned exactly; kb-ci.yml
-# reads this list rather than carrying its own copy.
 runtime_deps:
   - jsonschema[format-nongpl]==4.26.0
   - PyYAML==6.0.3
