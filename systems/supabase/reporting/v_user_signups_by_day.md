@@ -1,19 +1,18 @@
 ---
 doc_class: human-object
 object: supabase.reporting.v_user_signups_by_day
-written_against_schema_hash: "sha256:59eaa3b44cc53232cb9e83609a01990fc26dfab632282b59e33473eedd498192"
-status: contaminated
-contamination: {object: "supabase.reporting.v_user_signups_by_day", change: "column_removed+definition_changed", detail: "column_removed: signup_date; definition_changed"}
-last_verified: null
+written_against_schema_hash: "sha256:cba88302f11c160a969970b5b4717baa13862a2ca7098bfcdfc504066d0a1da6"
+status: verified
+last_verified: "2026-08-05 (Alper Camli)"
 purpose: "New user accounts per UTC calendar day — the signup trend series."
 column_purposes:
-  signup_date: "UTC calendar date the accounts were created (`users.created_at` converted to UTC, then truncated)."
+  signup_day: "UTC calendar date the accounts were created (`users.created_at` converted to UTC, then truncated)."
   new_users: "Accounts created on that date."
 sources:
   - "platform: deploy/reporting-views.sql (view definition, CP-7 task 7.0 / D-81)"
   - "machine doc: supabase.reporting.v_user_signups_by_day"
   - "human doc: supabase.public.users"
-  - "steward: `signup_day` → `signup_date` confirmed as a rename by the customer (sync PR #35 review, 2026-08-05); SELECT expression unchanged in the canonical view definition"
+  - "steward: `signup_day` → `signup_date` confirmed as a rename by the customer (sync PR #35 review, 2026-08-05); reverted to `signup_day` at the A-1 drill close (sync PR #38, 2026-08-05) — the estate is byte-identical to pre-drill, and this doc again matches it"
 depends_on:
   - supabase.public.users
 ---
