@@ -23,7 +23,7 @@ status: machine
 
 | # | Column | Type | Nullable | Default | Description | Purpose |
 |---|---|---|---|---|---|---|
-| 1 | `signup_day` | `date` | true | — | — | — |
+| 1 | `signup_day` | `date` | true | — | — | UTC calendar date the accounts were created (`users.created_at` converted to UTC, then truncated). |
 | 2 | `new_users` | `bigint` | true | — | — | Accounts created on that date. |
 
 ## Keys & indexes
