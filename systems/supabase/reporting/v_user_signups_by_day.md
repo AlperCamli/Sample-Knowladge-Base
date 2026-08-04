@@ -2,8 +2,8 @@
 doc_class: human-object
 object: supabase.reporting.v_user_signups_by_day
 written_against_schema_hash: "sha256:cba88302f11c160a969970b5b4717baa13862a2ca7098bfcdfc504066d0a1da6"
-status: contaminated
-last_verified: null
+status: verified
+last_verified: "2026-08-05 (Alper Camli)"
 purpose: "New user accounts per UTC calendar day — the signup trend series."
 column_purposes:
   signup_day: "UTC calendar date the accounts were created (`users.created_at` converted to UTC, then truncated)."
