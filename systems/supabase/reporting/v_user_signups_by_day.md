@@ -3,6 +3,7 @@ doc_class: human-object
 object: supabase.reporting.v_user_signups_by_day
 written_against_schema_hash: "sha256:59eaa3b44cc53232cb9e83609a01990fc26dfab632282b59e33473eedd498192"
 status: contaminated
+contamination: {object: "supabase.reporting.v_user_signups_by_day", change: "column_removed+definition_changed", detail: "column_removed: signup_date; definition_changed"}
 last_verified: null
 purpose: "New user accounts per UTC calendar day — the signup trend series."
 column_purposes:
