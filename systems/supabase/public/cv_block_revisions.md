@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.public.cv_block_revisions
 written_against_schema_hash: "sha256:3a1278bd5ecfd1421d8e528690c056db43cf2a1beefe7af00752ac1858e98415"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "Immutable per-block revision history for a master or tailored CV, ordered per block."
 column_purposes:
@@ -29,7 +29,7 @@ depends_on:
   - supabase.public.master_cvs
   - supabase.public.tailored_cvs
   - supabase.public.ai_suggestions
-contamination: null
+contamination: {object: "supabase.public.ai_suggestions", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.public.cv_block_revisions`

@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.reporting.v_master_cvs_by_language
 written_against_schema_hash: "sha256:a79db79fd110a4c74212cf4ff0738568a509e37f588c776d694787f1efe2baf7"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "Active master-CV inventory by language and how it was created (uploaded, built, imported)."
 column_purposes:
@@ -16,7 +16,7 @@ sources:
   - "human doc: supabase.public.master_cvs"
 depends_on:
   - supabase.public.master_cvs
-contamination: null
+contamination: {object: "supabase.public.master_cvs", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.reporting.v_master_cvs_by_language`

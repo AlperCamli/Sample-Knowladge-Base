@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.public.ai_runs
 written_against_schema_hash: "sha256:1371cc0551146b3167888b67d16ddbf8c054f90222a4cb07b3312d9a18a89497"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "A single AI model invocation capturing the flow, provider, payloads, token usage, and progress of a generation request."
 column_purposes:
@@ -36,7 +36,7 @@ depends_on:
   - supabase.public.tailored_cvs
   - supabase.public.jobs
   - supabase.public.ai_suggestions
-contamination: null
+contamination: {object: "supabase.public.ai_runs", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.public.ai_runs`

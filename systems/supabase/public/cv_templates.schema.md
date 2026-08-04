@@ -3,7 +3,7 @@ doc_class: machine-object
 object: supabase.public.cv_templates
 kind: table
 schema_hash: "sha256:ed76990d537238d6556cb9e39d4764401203b4840b8e831ecce4a4c9156d327c"
-generated_at: 2026-07-12
+generated_at: 2026-08-04
 source_mode: live
 snapshot_version: "1"
 status: machine
@@ -46,6 +46,8 @@ Unique constraints:
 Indexes:
 
 - `CREATE INDEX cv_templates_status_idx ON public.cv_templates USING btree (status)`
+
+Check constraints: —
 
 ## Row estimate & freshness
 

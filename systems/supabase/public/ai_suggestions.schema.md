@@ -2,8 +2,8 @@
 doc_class: machine-object
 object: supabase.public.ai_suggestions
 kind: table
-schema_hash: "sha256:c326f46f6e3edfd4eb7ab7a81bbc17869a290886d0c8d10fd5e52f32556c605d"
-generated_at: 2026-07-12
+schema_hash: "sha256:ade54c449fce828fe4047fa7ea3802f42f2f053584706920e20d8bb1177af095"
+generated_at: 2026-08-04
 source_mode: live
 snapshot_version: "1"
 status: machine
@@ -17,7 +17,7 @@ status: machine
 |---|---|
 | Object | `supabase.public.ai_suggestions` |
 | Kind | table |
-| Schema hash | `sha256:c326f46f6e3edfd4eb7ab7a81bbc17869a290886d0c8d10fd5e52f32556c605d` |
+| Schema hash | `sha256:ade54c449fce828fe4047fa7ea3802f42f2f053584706920e20d8bb1177af095` |
 
 ## Columns
 
@@ -61,6 +61,13 @@ Indexes:
 - `CREATE INDEX ai_suggestions_tailored_block_status_idx ON public.ai_suggestions USING btree (tailored_cv_id, block_id, status, created_at DESC) WHERE ((tailored_cv_id IS NOT NULL) AND (block_id IS NOT NULL))`
 - `CREATE INDEX ai_suggestions_tailored_status_idx ON public.ai_suggestions USING btree (tailored_cv_id, status, created_at DESC)`
 - `CREATE INDEX ai_suggestions_user_created_at_idx ON public.ai_suggestions USING btree (user_id, created_at DESC)`
+
+Check constraints:
+
+- `CHECK (action_type = ANY (ARRAY['rewrite'::text, 'summarize'::text, 'improve'::text, 'ats_optimize'::text, 'options'::text, 'expand'::text, 'shorten'::text]))`
+- `CHECK (status = 'applied'::text AND applied_at IS NOT NULL OR (status = ANY (ARRAY['pending'::text, 'rejected'::text, 'expired'::text])) AND applied_at IS NULL)`
+- `CHECK (status = ANY (ARRAY['pending'::text, 'applied'::text, 'rejected'::text, 'expired'::text]))`
+- `CHECK (tailored_cv_id IS NOT NULL AND master_cv_id IS NULL OR tailored_cv_id IS NULL AND master_cv_id IS NOT NULL)`
 
 ## Row estimate & freshness
 

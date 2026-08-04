@@ -3,7 +3,7 @@ doc_class: machine-object
 object: supabase.public.subscriptions
 kind: table
 schema_hash: "sha256:aa2bf4a4a88ec655bbb5e0ff78af326ac6c5f20da62f6803cfaa4940fb8c5972"
-generated_at: 2026-07-12
+generated_at: 2026-08-04
 source_mode: live
 snapshot_version: "1"
 status: machine
@@ -55,6 +55,8 @@ Indexes:
 - `CREATE INDEX subscriptions_status_idx ON public.subscriptions USING btree (status)`
 - `CREATE INDEX subscriptions_user_id_idx ON public.subscriptions USING btree (user_id)`
 - `CREATE UNIQUE INDEX subscriptions_one_active_per_user_idx ON public.subscriptions USING btree (user_id) WHERE (status = ANY (ARRAY['active'::text, 'trialing'::text]))`
+
+Check constraints: —
 
 ## Row estimate & freshness
 

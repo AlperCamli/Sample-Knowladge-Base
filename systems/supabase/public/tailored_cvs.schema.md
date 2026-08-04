@@ -2,8 +2,8 @@
 doc_class: machine-object
 object: supabase.public.tailored_cvs
 kind: table
-schema_hash: "sha256:401ae631f9f475a3cbc7c633a68fb3ff98ac5b2d57ab30dafebd271975e95945"
-generated_at: 2026-07-27
+schema_hash: "sha256:cc4a4dbdafe5db2fb9520a10ca0bb3a3bd858664e411207da3bc390b0083ee2e"
+generated_at: 2026-08-04
 source_mode: live
 snapshot_version: "1"
 status: machine
@@ -17,7 +17,7 @@ status: machine
 |---|---|
 | Object | `supabase.public.tailored_cvs` |
 | Kind | table |
-| Schema hash | `sha256:401ae631f9f475a3cbc7c633a68fb3ff98ac5b2d57ab30dafebd271975e95945` |
+| Schema hash | `sha256:cc4a4dbdafe5db2fb9520a10ca0bb3a3bd858664e411207da3bc390b0083ee2e` |
 
 ## Columns
 
@@ -62,9 +62,13 @@ Indexes:
 - `CREATE INDEX tailored_cvs_user_id_is_deleted_idx ON public.tailored_cvs USING btree (user_id, is_deleted)`
 - `CREATE UNIQUE INDEX tailored_cvs_unique_job_active_idx ON public.tailored_cvs USING btree (job_id) WHERE ((job_id IS NOT NULL) AND (is_deleted = false))`
 
+Check constraints:
+
+- `CHECK (status = ANY (ARRAY['draft'::text, 'ready'::text, 'exported'::text, 'archived'::text]))`
+
 ## Row estimate & freshness
 
-Row estimate: 96
+Row estimate: 102
 
 Freshness: facts reflect the snapshot recorded in `generated_at` (front-matter).
 

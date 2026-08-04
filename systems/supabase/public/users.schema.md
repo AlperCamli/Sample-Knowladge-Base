@@ -2,8 +2,8 @@
 doc_class: machine-object
 object: supabase.public.users
 kind: table
-schema_hash: "sha256:aefee2abaca5b3f73bf8062903148200a7e8c5df3240b632e65586a1324fdd58"
-generated_at: 2026-07-27
+schema_hash: "sha256:fc210fb49c45a244fc34d40f2db5978e4b22c479e2cb5034c909b4f1f79a2491"
+generated_at: 2026-08-04
 source_mode: live
 snapshot_version: "1"
 status: machine
@@ -17,7 +17,7 @@ status: machine
 |---|---|
 | Object | `supabase.public.users` |
 | Kind | table |
-| Schema hash | `sha256:aefee2abaca5b3f73bf8062903148200a7e8c5df3240b632e65586a1324fdd58` |
+| Schema hash | `sha256:fc210fb49c45a244fc34d40f2db5978e4b22c479e2cb5034c909b4f1f79a2491` |
 
 ## Columns
 
@@ -45,6 +45,10 @@ Unique constraints:
 - `auth_user_id`
 
 Indexes: —
+
+Check constraints:
+
+- `CHECK (locale = ANY (ARRAY['en'::text, 'tr'::text]))`
 
 ## Row estimate & freshness
 

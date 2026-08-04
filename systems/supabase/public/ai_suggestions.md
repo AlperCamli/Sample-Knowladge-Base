@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.public.ai_suggestions
 written_against_schema_hash: "sha256:c326f46f6e3edfd4eb7ab7a81bbc17869a290886d0c8d10fd5e52f32556c605d"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "Block-level AI suggestions produced by an AI run, scoped to a master or tailored CV and pending review/apply."
 column_purposes:
@@ -30,7 +30,7 @@ depends_on:
   - supabase.public.tailored_cvs
   - supabase.public.master_cvs
   - supabase.public.cv_block_revisions
-contamination: null
+contamination: {object: "supabase.public.ai_runs", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.public.ai_suggestions`

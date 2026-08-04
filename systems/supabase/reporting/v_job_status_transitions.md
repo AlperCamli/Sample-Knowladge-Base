@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.reporting.v_job_status_transitions
 written_against_schema_hash: "sha256:95c6baa1d34ce2f5709dff4f1feff12d5c5062114e6d1ad7cb45cf47a8855121"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "Daily counts of job-application status transitions — the source for a transition matrix."
 column_purposes:
@@ -17,7 +17,7 @@ sources:
   - "human doc: supabase.public.job_status_history"
 depends_on:
   - supabase.public.job_status_history
-contamination: null
+contamination: {object: "supabase.public.job_status_history", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.reporting.v_job_status_transitions`

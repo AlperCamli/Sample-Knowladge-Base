@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.public.tailored_cvs
 written_against_schema_hash: "sha256:401ae631f9f475a3cbc7c633a68fb3ff98ac5b2d57ab30dafebd271975e95945"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "A job-specific variant of a master CV produced for a single tracked job application."
 column_purposes:
@@ -32,7 +32,7 @@ depends_on:
   - supabase.public.master_cvs
   - supabase.public.jobs
   - supabase.public.cv_templates
-contamination: null
+contamination: {object: "supabase.public.jobs", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.public.tailored_cvs`

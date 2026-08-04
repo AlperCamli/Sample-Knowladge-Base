@@ -2,8 +2,8 @@
 doc_class: machine-object
 object: supabase.public.cover_letter_exports
 kind: table
-schema_hash: "sha256:4e9e86056fbd97f3a527042842d3e3389b39640933860719b21e914712d85408"
-generated_at: 2026-07-12
+schema_hash: "sha256:9bf2ae759a3cb65137f7565ce6c2ebbf8035d949b23a3b240c369b5f00466d7f"
+generated_at: 2026-08-04
 source_mode: live
 snapshot_version: "1"
 status: machine
@@ -17,7 +17,7 @@ status: machine
 |---|---|
 | Object | `supabase.public.cover_letter_exports` |
 | Kind | table |
-| Schema hash | `sha256:4e9e86056fbd97f3a527042842d3e3389b39640933860719b21e914712d85408` |
+| Schema hash | `sha256:9bf2ae759a3cb65137f7565ce6c2ebbf8035d949b23a3b240c369b5f00466d7f` |
 
 ## Columns
 
@@ -52,6 +52,12 @@ Indexes:
 - `CREATE INDEX cover_letter_exports_cover_letter_id_created_at_idx ON public.cover_letter_exports USING btree (cover_letter_id, created_at DESC)`
 - `CREATE INDEX cover_letter_exports_status_created_at_idx ON public.cover_letter_exports USING btree (status, created_at DESC)`
 - `CREATE INDEX cover_letter_exports_user_id_created_at_idx ON public.cover_letter_exports USING btree (user_id, created_at DESC)`
+
+Check constraints:
+
+- `CHECK (format = ANY (ARRAY['pdf'::text, 'docx'::text]))`
+- `CHECK (status = 'processing'::text AND file_id IS NULL AND completed_at IS NULL AND error_message IS NULL OR status = 'completed'::text AND file_id IS NOT NULL AND completed_at IS NOT NULL AND error_message IS NULL OR status = 'failed'::text AND file_id IS NULL AND completed_at IS NULL AND error_message IS NOT NULL)`
+- `CHECK (status = ANY (ARRAY['processing'::text, 'completed'::text, 'failed'::text]))`
 
 ## Row estimate & freshness
 

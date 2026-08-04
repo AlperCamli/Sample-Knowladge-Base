@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.reporting.v_activation_funnel_monthly
 written_against_schema_hash: "sha256:d1c38c2fe7c88702255c00612304dc05b7cc290661e4cf3a366e043a3f16bcf5"
-status: draft
+status: contaminated
 last_verified: null
 purpose: "Monthly signup cohorts with same-month activation counts across four product milestones."
 column_purposes:
@@ -27,7 +27,7 @@ depends_on:
   - supabase.public.tailored_cvs
   - supabase.public.exports
   - supabase.public.subscriptions
-contamination: null
+contamination: {object: "supabase.public.exports", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.reporting.v_activation_funnel_monthly`
