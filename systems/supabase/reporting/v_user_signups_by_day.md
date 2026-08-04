@@ -14,7 +14,7 @@ sources:
   - "human doc: supabase.public.users"
 depends_on:
   - supabase.public.users
-contamination: {object: "supabase.public.users", change: "stat_changed", detail: "stat_changed: checks"}
+contamination: {object: "supabase.reporting.v_user_signups_by_day", change: "column_removed+definition_changed", detail: "column_removed: signup_day; definition_changed"}
 ---
 
 # `supabase.reporting.v_user_signups_by_day`
