@@ -11,7 +11,7 @@ column_purposes:
   provider: "External billing provider name (e.g. Stripe)."
   provider_customer_id: "Customer id on the provider side."
   provider_subscription_id: "Subscription id on the provider side."
-  plan_code: "Internal product plan code purchased."
+  plan_code: "Internal product plan code purchased; see body for the grounded value set."
   status: "Current lifecycle status; see body for grounding limits."
   current_period_start: "Start of the current billing period."
   current_period_end: "End of the current billing period."
@@ -22,6 +22,8 @@ sources:
   - "customer doc: cv-data-model-kb/CV_data_tool/tables/subscriptions.md"
   - "app DDL: CV_Builder/backend/supabase/migrations/20260417121000_phase1_tables.sql (subscriptions_one_active_per_user_idx)"
   - "machine doc: supabase.public.subscriptions"
+  - "customer-provided, alper, 2026-08-07 (plan_code value set: free, pro)"
+  - "observed, 2026-08-07: SELECT plan_code, status, count(*) FROM public.subscriptions GROUP BY 1,2 returned 0 rows"
 depends_on:
   - supabase.public.users
 contamination: {object: "supabase.public.users", change: "stat_changed", detail: "stat_changed: checks"}
@@ -45,10 +47,17 @@ enforces **at most one *active* subscription per user**
   above); the customer model additionally lists **`canceled`** as an example.
   The complete provider-driven vocabulary (e.g. `past_due`, `incomplete`,
   `unpaid`) is **not grounded here** — a named gap; do not assume a fixed set.
+  Note there is no `inactive` value in any grounded source, and `trialing` is
+  a distinct third state — this column does not reduce to an active/inactive
+  binary.
+- `plan_code` — internal product plan identifier. Stated value set:
+  **`free`** and **`pro`**. This set is **customer-stated, not observed and
+  not DB-enforced** — there is no CHECK constraint on the column, and the
+  table held **0 rows** when queried on 2026-08-07, so no value has ever been
+  seen in data. Authoritative for intent; verify against rows before pinning
+  a certified metric to it.
 - `provider` — free text; the customer model gives Stripe as the example. Not
   DB-enumerated.
-- `plan_code` — internal product plan identifier. The set of valid codes is
-  **not grounded** in the DB or the provided docs — gap.
 - `provider_customer_id` / `provider_subscription_id` — the provider-side ids;
   both nullable and indexed *per provider* (`(provider, provider_*_id)` where
   not null), so uniqueness is scoped within a provider.
@@ -69,10 +78,21 @@ enforces **at most one *active* subscription per user**
   rows per user — historical rows inflate it.
 - Churn signals: `cancel_at_period_end = true` flags a scheduled cancel that
   has not yet ended; a terminal `status` is a separate, already-ended state.
+- Plan mix is `group by plan_code`, but see the empty-table warning below
+  before publishing any such number.
 
 ## Warnings
 
 - `status` is **not** a DB enum — treat any set as open and provider-defined
   (gap above). Certified revenue/subscription metrics must pin the exact
   status values they count and cite the provider's own status vocabulary.
+- `plan_code` is **not** a DB enum either — no CHECK constraint exists. The
+  `free`/`pro` set is customer-stated (see `sources`), not enforced and not
+  observed. A new plan code can enter the data with no schema change and no
+  change to this doc's schema hash, so nothing will flag this doc stale when
+  it happens. Do not treat it as closed in a certified metric.
+- The table was **empty (0 rows) as of 2026-08-07**. Any plan-mix or
+  subscription-count report built on it returns nothing today, which makes a
+  zero result indistinguishable from a broken query. Confirm the table is
+  non-empty before interpreting a zero.
 - No `is_deleted`/soft-delete here; lifecycle is expressed through `status`.

@@ -28,7 +28,7 @@ status: machine
 | 3 | `provider` | `text` | false | — | — | External billing provider name (e.g. Stripe). |
 | 4 | `provider_customer_id` | `text` | true | — | — | Customer id on the provider side. |
 | 5 | `provider_subscription_id` | `text` | true | — | — | Subscription id on the provider side. |
-| 6 | `plan_code` | `text` | false | — | — | Internal product plan code purchased. |
+| 6 | `plan_code` | `text` | false | — | — | Internal product plan code purchased; see body for the grounded value set. |
 | 7 | `status` | `text` | false | — | — | Current lifecycle status; see body for grounding limits. |
 | 8 | `current_period_start` | `timestamp with time zone` | true | — | — | Start of the current billing period. |
 | 9 | `current_period_end` | `timestamp with time zone` | true | — | — | End of the current billing period. |
