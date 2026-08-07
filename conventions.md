@@ -91,6 +91,43 @@ in snapshots):
   user explicitly wants the freshest numbers, and say in the answer
   that the most recent days are provisional.
 
+## How changes land here
+
+Every change to this knowledge base arrives as a **pull request** and
+leaves as a **merge somebody performed under their own name**. Nothing in
+the Context Layer product can write to `main`: the dashboard triages, the
+`enrich` skill drafts, and a person merges. That merge is the
+certification act — when a doc lands with `status: verified` and a
+`last_verified` date, the date is a human's signature on it.
+
+`main` is protected. Two things are required of every pull request:
+
+- **KB CI must pass** — front-matter schemas, layout, link resolution,
+  render consistency (KB-8) and purpose-key resolution (KB-10).
+- **The check must demonstrably have run.** An absent check is not a
+  passing one. This is not hypothetical here: PR #40 was opened with no
+  workflow run at all and the runs arrived seventeen minutes later, so for
+  seventeen minutes the pull request looked exactly as it would have if
+  the check had passed. If a PR shows no check, cause one (closing and
+  reopening it is enough) and wait for it.
+
+### Solo-operator mode
+
+**This deployment currently has one human with write access, so
+required code-owner review cannot be satisfied and each merge is an
+administrator bypass.** That is stated here rather than left to be
+inferred from a history of overrides, and it is not a relaxation of the
+rule: the bypass merge **is** the certification act described above,
+performed by the only person who can perform it. What is not claimed is a
+second pair of eyes — nothing in this repository's history should be read
+as having had one.
+
+The mechanical guard stays on. CI is required and must be seen to have
+run; a red check is a stop, whoever is merging.
+
+**When a second person gets write access, required review comes back.**
+That is the trigger, and it is the whole of the trigger.
+
 ## Machine-readable guardrails
 
 ```yaml
