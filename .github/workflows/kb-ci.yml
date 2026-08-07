@@ -78,3 +78,18 @@ jobs:
 
       - name: Validate KB
         run: python -m generator.validate .
+
+      # KB-9 / R7 (platform ruling D-119.2a). Deterministic only: every
+      # expected object and every object a golden references must resolve
+      # against .contextlayer/snapshots/, and every column a SQL golden
+      # binds to a base table must exist there. A case resting on a
+      # `contaminated` doc is flagged, not failed — the repair belongs in
+      # triage, not in a red check on an unrelated pull request.
+      #
+      # ZERO model calls and no network: accuracy runs are manual by
+      # design (product spec §11). A repo with no suite at
+      # .contextlayer/benchmark/suite.yaml prints that it found none and
+      # passes — "nothing was checked" must not read like "all checks
+      # passed" (D-116.4, one layer down).
+      - name: Golden benchmark suite integrity (KB-9)
+        run: python -m benchmark.integrity --kb .
