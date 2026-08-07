@@ -28,15 +28,24 @@
 # beats a silent validation against a stale wheel.
 
 package: contextlayer-snapshot
-version: 0.6.0
-wheel: contextlayer_snapshot-0.6.0-py3-none-any.whl
-sha256: 5efd5fa6b66661e389e1f4bdad331f3f2115bc2e08b3d2751f8c601c3247888d
-platform_commit: 468fe87fae0bb41eb956ccf970116433d380591d
-built: 2026-08-04
+version: 0.7.0
+wheel: contextlayer_snapshot-0.7.0-py3-none-any.whl
+sha256: 3b7719ee523f0385bc1120cf5b120c56c458b802a805f7900013efa9e81c90ab
+platform_commit: 424500fa8df38726d987e4b020d12b7eac58f13d
+built: 2026-08-07
 built_by: contextlayer-sync (sync spec §10 wheel carry)
 source: platform repo (local, no public remote) — DataProject
 runtime_deps_pinned_in: this file (runtime_deps)
+# sqlglot arrives with 0.7.0 (D-119.2a): the golden-suite integrity check
+# parses SQL goldens to bind their columns to base relations. Same pin the
+# platform builds against (constraints.txt) — a different parser version is
+# a different verdict on the same diff.
+#
+# Keep this list contiguous: kb-ci.yml reads it with an awk that stops at
+# the first line which is not a `  - ` entry, so a comment *inside* the
+# list silently truncates it and the deps below it are never installed.
 runtime_deps:
   - jsonschema[format-nongpl]==4.26.0
   - PyYAML==6.0.3
   - jinja2==3.1.6
+  - sqlglot==30.12.0
