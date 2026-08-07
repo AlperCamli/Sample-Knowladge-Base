@@ -1,8 +1,8 @@
 ---
 doc_class: human-object
 object: supabase.public.files
-written_against_schema_hash: "sha256:a3a1531959d76aab8a389c584aa353dc06718b96a8df3979de7e3b5ee36c4f7a"
-status: contaminated
+written_against_schema_hash: "sha256:f4cb3076102fd20187f53f16f0bd57db712536ee0da9faf8a4887ac77e7e59d3"
+status: draft
 last_verified: null
 purpose: "Metadata records for binary objects stored in Supabase storage buckets, owned by users."
 column_purposes:
@@ -26,7 +26,7 @@ depends_on:
   - supabase.public.imports
   - supabase.public.exports
   - supabase.public.cover_letter_exports
-contamination: {object: "supabase.public.cover_letter_exports", change: "stat_changed", detail: "stat_changed: checks"}
+contamination: null
 ---
 
 # `supabase.public.files`

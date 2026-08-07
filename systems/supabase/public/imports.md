@@ -1,8 +1,8 @@
 ---
 doc_class: human-object
 object: supabase.public.imports
-written_against_schema_hash: "sha256:637c57a9477ce54183d6f23df56a09c439bdf16333457573c081240d565ac026"
-status: contaminated
+written_against_schema_hash: "sha256:2ce8cbca259d1dc0b98220ad5c7d604912fa23f7c4f4e96b10f212d5b4f96d8c"
+status: draft
 last_verified: null
 purpose: "Pipeline records tracking the parse of an uploaded source CV file into structured content for a master CV."
 column_purposes:
@@ -28,7 +28,7 @@ depends_on:
   - supabase.public.users
   - supabase.public.files
   - supabase.public.master_cvs
-contamination: {object: "supabase.public.files", change: "stat_changed", detail: "stat_changed: checks"}
+contamination: null
 ---
 
 # `supabase.public.imports`

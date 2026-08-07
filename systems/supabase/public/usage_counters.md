@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.public.usage_counters
 written_against_schema_hash: "sha256:d6d645c999291cbdac6590455a6beae64eaa7519a9692d293239519458e64393"
-status: contaminated
+status: draft
 last_verified: null
 purpose: "Per-user monthly counters tracking AI, generation, export, and storage consumption against plan entitlements."
 column_purposes:
@@ -22,6 +22,7 @@ sources:
 depends_on:
   - supabase.public.users
   - supabase.public.subscriptions
+contamination: null
 ---
 
 # `supabase.public.usage_counters`
