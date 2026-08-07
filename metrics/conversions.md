@@ -1,8 +1,8 @@
 ---
 doc_class: metric
-status: draft
-last_verified: null
-owner: "alper (operator) — pending"
+status: verified
+last_verified: "2026-08-08 (Alper Camli)"
+owner: "alper (operator)"
 aliases: [purchases, paid conversions, key events]
 sources:
   - "customer-verified SQL + API golden: benchmark suite case RB-08 (.contextlayer/benchmark/suite.yaml)"
