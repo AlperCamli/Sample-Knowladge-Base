@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.reporting.v_ai_runs_by_day
 written_against_schema_hash: "sha256:befbb2a86c14fc5684b9145b937e7664678abcaae081fce34aa8506d08cef9fd"
-status: contaminated
+status: draft
 last_verified: null
 purpose: "AI runs started per UTC day, split by terminal status — the reliability trend series."
 column_purposes:
@@ -16,7 +16,7 @@ sources:
   - "human doc: supabase.public.ai_runs"
 depends_on:
   - supabase.public.ai_runs
-contamination: {object: "supabase.public.ai_runs", change: "stat_changed", detail: "stat_changed: checks"}
+contamination: null
 ---
 
 # `supabase.reporting.v_ai_runs_by_day`

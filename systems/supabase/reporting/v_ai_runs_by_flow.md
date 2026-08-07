@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.reporting.v_ai_runs_by_flow
 written_against_schema_hash: "sha256:decb62fc93c17415b1901bbbdabe0f4676c767f640007addbb7f5aad904e1ece"
-status: contaminated
+status: draft
 last_verified: null
 purpose: "AI invocation volume, token consumption and latency, split by flow, provider, model and outcome."
 column_purposes:
@@ -22,7 +22,7 @@ sources:
   - "human doc: supabase.public.ai_runs"
 depends_on:
   - supabase.public.ai_runs
-contamination: {object: "supabase.public.ai_runs", change: "stat_changed", detail: "stat_changed: checks"}
+contamination: null
 ---
 
 # `supabase.reporting.v_ai_runs_by_flow`
