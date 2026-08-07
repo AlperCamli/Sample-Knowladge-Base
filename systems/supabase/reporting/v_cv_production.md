@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.reporting.v_cv_production
 written_against_schema_hash: "sha256:228d079f208abe02ea559884b36e89a3a330abeaca3176a1fe215333344c08bd"
-status: contaminated
+status: draft
 last_verified: null
 purpose: "Tailored-CV output per month and language, including how many of that cohort were later soft-deleted."
 column_purposes:
@@ -17,7 +17,7 @@ sources:
   - "human doc: supabase.public.tailored_cvs"
 depends_on:
   - supabase.public.tailored_cvs
-contamination: {object: "supabase.public.tailored_cvs", change: "stat_changed", detail: "stat_changed: checks"}
+contamination: null
 ---
 
 # `supabase.reporting.v_cv_production`
