@@ -1,8 +1,8 @@
 ---
 doc_class: human-object
 object: supabase.public.master_cvs
-written_against_schema_hash: "sha256:fedbafc33b7a23d0b1fb9c4f646ca486df3265d32a686385ccfbc2790c6de177"
-status: contaminated
+written_against_schema_hash: "sha256:36f26160208576eb9cdd4f0a3b707f6d3ff9babf89d2d65622e1ab66d110a273"
+status: draft
 last_verified: null
 purpose: "A user's authoritative master CV holding the canonical content that tailored variants are generated from."
 column_purposes:
@@ -28,7 +28,7 @@ depends_on:
   - supabase.public.users
   - supabase.public.cv_templates
   - supabase.public.tailored_cvs
-contamination: {object: "supabase.public.master_cvs", change: "stat_changed", detail: "stat_changed: checks"}
+contamination: null
 ---
 
 # `supabase.public.master_cvs`

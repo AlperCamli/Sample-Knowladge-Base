@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.reporting.v_jobs_by_status
 written_against_schema_hash: "sha256:8ba1db1fd08c5a3bd5432b0e6e8d9f57d654a01b31ddf3f53c124f4036f9ba80"
-status: contaminated
+status: draft
 last_verified: null
 purpose: "Job-application pipeline size by status: how many tracked postings sit in each stage, over how many users, and the date range each stage spans."
 column_purposes:
@@ -13,11 +13,13 @@ column_purposes:
   last_created: "Latest `created_at` among jobs in this status."
 sources:
   - "platform: deploy/reporting-views.sql (view definition, CP-6/M2)"
+  - "app DDL: CV_Builder/backend/supabase/migrations/20260417133000_phase2_cv_domains.sql (jobs_status_check, original six-value set)"
+  - "app DDL: CV_Builder/backend/supabase/migrations/20260418123000_phase4a_jobs_dashboard_rendering.sql (jobs_status_check re-added with interview/offer; the operative constraint)"
   - "machine doc: supabase.reporting.v_jobs_by_status"
   - "human doc: supabase.public.jobs"
 depends_on:
   - supabase.public.jobs
-contamination: {object: "supabase.public.jobs", change: "stat_changed", detail: "stat_changed: checks"}
+contamination: null
 ---
 
 # `supabase.reporting.v_jobs_by_status`
@@ -48,7 +50,18 @@ One row per distinct `status` value present in `public.jobs`. A status with no r
 - **Small counts can still identify.** The estate is ~24 users. A group of size
   1–2 is potentially personal even though no column names anyone; treat such
   cells as sensitive rather than reportable.
-- `status` is not constrained by a database CHECK, so new values can appear
-  without warning. Do not hard-code the set; read it from this view.
+- **`status` *is* constrained by a database CHECK.** `jobs_status_check` on
+  `public.jobs` admits exactly **`saved` | `applied` | `interview` | `offer` |
+  `rejected` | `archived`** and nothing else — a new value cannot appear
+  without a migration. This doc previously warned the opposite ("`status` is
+  not constrained by a database CHECK, so new values can appear without
+  warning"). That was an **inverted claim, not a stale one**: the constraint
+  has been in force since `public.jobs` was created on **2026-04-17**, and has
+  carried these six values since the phase-4A rename on **2026-04-18** — there
+  was no window in which the column was unconstrained. The set is therefore
+  safe to hard-code as a stage ordering. Note the direction the Grain section
+  already gives: this view lists only statuses that currently have rows, so it
+  is always a subset of the six and never a superset — deriving the vocabulary
+  *from this view*, as this doc used to advise, silently omits empty stages.
 - Counts are of *tracked postings*, not applications submitted. `applied_count`
   in `v_jobs_by_month` is the closer proxy for submissions.

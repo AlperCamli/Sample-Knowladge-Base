@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.reporting.v_jobs_by_month
 written_against_schema_hash: "sha256:139aa747a5499b9fd846f72f6b2215d977521874d4f31b6138b021cb57c4ee48"
-status: contaminated
+status: draft
 last_verified: null
 purpose: "Monthly job-tracking volume: postings created per month, how many users created them, and how many reached the applied stage."
 column_purposes:
@@ -16,7 +16,7 @@ sources:
   - "human doc: supabase.public.jobs"
 depends_on:
   - supabase.public.jobs
-contamination: {object: "supabase.public.jobs", change: "stat_changed", detail: "stat_changed: checks"}
+contamination: null
 ---
 
 # `supabase.reporting.v_jobs_by_month`
