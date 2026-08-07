@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.reporting.v_imports_by_parser
 written_against_schema_hash: "sha256:cb1b281c8f54924d118cd6494afcf2ab872b107d591c9adbc9011915dc8c78f4"
-status: contaminated
+status: draft
 last_verified: null
 purpose: "CV import volume by parser and outcome — the reliability view for document ingestion."
 column_purposes:
@@ -16,7 +16,7 @@ sources:
   - "human doc: supabase.public.imports"
 depends_on:
   - supabase.public.imports
-contamination: {object: "supabase.public.imports", change: "stat_changed", detail: "stat_changed: checks"}
+contamination: null
 ---
 
 # `supabase.reporting.v_imports_by_parser`

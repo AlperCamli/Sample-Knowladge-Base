@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.reporting.v_exports_by_format
 written_against_schema_hash: "sha256:23ebec8a64c7bd850eebd3897530e3f5bcba383827dae25329453280bd1d4076"
-status: contaminated
+status: draft
 last_verified: null
 purpose: "Export volume by output format and outcome."
 column_purposes:
@@ -16,7 +16,7 @@ sources:
   - "human doc: supabase.public.exports"
 depends_on:
   - supabase.public.exports
-contamination: {object: "supabase.public.exports", change: "stat_changed", detail: "stat_changed: checks"}
+contamination: null
 ---
 
 # `supabase.reporting.v_exports_by_format`
