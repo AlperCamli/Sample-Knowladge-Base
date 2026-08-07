@@ -2,8 +2,8 @@
 doc_class: human-object
 object: supabase.public.subscriptions
 written_against_schema_hash: "sha256:aa2bf4a4a88ec655bbb5e0ff78af326ac6c5f20da62f6803cfaa4940fb8c5972"
-status: verified
-last_verified: "2026-08-07 (Alper Camli)"
+status: draft
+last_verified: null
 purpose: "Billing subscription records linking a user to an external payment-provider plan and its lifecycle state."
 column_purposes:
   id: "Internal subscription id."
@@ -24,6 +24,8 @@ sources:
   - "machine doc: supabase.public.subscriptions"
   - "customer-provided, alper, 2026-08-07 (plan_code value set: free, pro)"
   - "observed, 2026-08-07: SELECT plan_code, status, count(*) FROM public.subscriptions GROUP BY 1,2 returned 0 rows"
+  - "customer-provided, eda, 2026-08-07 (pro plan pricing by cadence: 4.99 weekly, 14.99 monthly, 99.00 annually; all three the same pro plan)"
+  - "customer-provided, alper, 2026-08-07 (annual price 99.00 confirmed against a conflicting 99.99 figure in a second, still-open request)"
 depends_on:
   - supabase.public.users
 ---
@@ -55,6 +57,14 @@ enforces **at most one *active* subscription per user**
   table held **0 rows** when queried on 2026-08-07, so no value has ever been
   seen in data. Authoritative for intent; verify against rows before pinning
   a certified metric to it.
+  The paid tier is sold on three billing cadences at one price each —
+  **4.99 weekly**, **14.99 monthly**, **99.00 annually** — and all three are
+  the *same* `pro` plan. Cadence is therefore **not** encoded in `plan_code`:
+  a `pro` row may be any of the three. These amounts are customer-stated (see
+  `sources`) and appear nowhere in the data — this table has no price, amount,
+  or currency column, and no plan or price object exists elsewhere in the
+  snapshot. The currency is stated only as "dollars"; no ISO code is grounded
+  (gap).
 - `provider` — free text; the customer model gives Stripe as the example. Not
   DB-enumerated.
 - `provider_customer_id` / `provider_subscription_id` — the provider-side ids;
@@ -79,6 +89,16 @@ enforces **at most one *active* subscription per user**
   has not yet ended; a terminal `status` is a separate, already-ended state.
 - Plan mix is `group by plan_code`, but see the empty-table warning below
   before publishing any such number.
+- **Revenue cannot be computed from this table.** There is no price, amount,
+  or currency column here and no plan/price object elsewhere in the snapshot;
+  the plan prices recorded above are customer-stated reference values, not
+  data. Take revenue from the billing provider and reconcile via
+  `(provider, provider_subscription_id)`.
+- **Billing cadence is not available.** Every paid row carries the same `pro`
+  `plan_code`, so weekly, monthly, and annual subscribers are
+  indistinguishable by plan. `current_period_start`/`current_period_end` do
+  span a period, but no grounded source says that span is the cadence — do
+  not derive one from it.
 
 ## Warnings
 
@@ -94,4 +114,12 @@ enforces **at most one *active* subscription per user**
   subscription-count report built on it returns nothing today, which makes a
   zero result indistinguishable from a broken query. Confirm the table is
   non-empty before interpreting a zero.
+- The plan prices above are **customer-stated on 2026-08-07 and absent from
+  the data**, so nothing in the estate can confirm or contradict them and no
+  drift check will ever re-examine them. A price change ships no schema
+  change, so this doc will keep asserting these figures until a human edits
+  it. Re-confirm before quoting them externally.
+- The stated amounts carry **no explicit currency** — "dollars", with no ISO
+  code grounded and no currency column on the table. A named gap; do not
+  assume USD in a certified metric.
 - No `is_deleted`/soft-delete here; lifecycle is expressed through `status`.
