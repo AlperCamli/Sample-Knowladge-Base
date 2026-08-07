@@ -2,7 +2,7 @@
 doc_class: human-object
 object: supabase.reporting.v_daily_activity
 written_against_schema_hash: "sha256:93fefebe723a600426cb0ecce19d62404db664bb97e50ddc3fd6b7844790ed5e"
-status: contaminated
+status: draft
 last_verified: null
 purpose: "Gap-free daily activity across the four main actions: jobs tracked, CVs tailored, exports, and AI runs."
 column_purposes:
@@ -23,7 +23,7 @@ depends_on:
   - supabase.public.tailored_cvs
   - supabase.public.exports
   - supabase.public.ai_runs
-contamination: {object: "supabase.public.ai_runs", change: "stat_changed", detail: "stat_changed: checks"}
+contamination: null
 ---
 
 # `supabase.reporting.v_daily_activity`

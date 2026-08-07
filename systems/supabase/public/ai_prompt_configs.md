@@ -1,8 +1,8 @@
 ---
 doc_class: human-object
 object: supabase.public.ai_prompt_configs
-written_against_schema_hash: "sha256:2df835a9e26fba31667cdb512f984a9464025f5903ff4b9d7161e2d4f86632b5"
-status: contaminated
+written_against_schema_hash: "sha256:9346b889e28062380fae34e5c838e89b2abfbb138452f56de47327ed04bde6ee"
+status: draft
 last_verified: null
 purpose: "Configurable prompt records resolved at runtime to supply system/user templates for AI flows by profile, provider, and action."
 column_purposes:
@@ -22,10 +22,12 @@ column_purposes:
 sources:
   - "customer doc: cv-data-model-kb/CV_data_tool/tables/ai_prompt_configs.md"
   - "app DDL: CV_Builder/backend/supabase/migrations (ai_prompt_configs_flow_type_check, ai_prompt_configs_action_type_check)"
+  - "app DDL: CV_Builder/backend/supabase/migrations/20260603160000_phase11_parallel_import_improve.sql (flow_type + professional_summary)"
+  - "app DDL: CV_Builder/backend/supabase/migrations/20260801120000_phase14_skills_pool_prompt_flow.sql (flow_type + skills_pool; the operative constraint)"
   - "machine doc: supabase.public.ai_prompt_configs"
 depends_on:
   - supabase.public.ai_runs
-contamination: {object: "supabase.public.ai_prompt_configs", change: "stat_changed", detail: "stat_changed: checks"}
+contamination: null
 ---
 
 # `supabase.public.ai_prompt_configs`
@@ -39,11 +41,14 @@ key. No `user_id`: this is shared configuration, not user data.
 
 ## Column meanings & enum decodings
 
-- `flow_type` — DB-constrained (`ai_prompt_configs_flow_type_check`) to:
-  **`job_analysis`, `follow_up_questions`, `tailored_draft`, `block_suggest`,
-  `block_compare`, `multi_option`, `import_improve`, `summary`, `improve`,
-  `cv_parse`, `cover_letter_generation`**. Same set as
-  `supabase.public.ai_runs.flow_type`.
+- `flow_type` — DB-constrained (`ai_prompt_configs_flow_type_check`) to these
+  **13** values: **`job_analysis`, `follow_up_questions`, `tailored_draft`,
+  `block_suggest`, `skills_pool`, `block_compare`, `multi_option`,
+  `import_improve`, `professional_summary`, `summary`, `improve`, `cv_parse`,
+  `cover_letter_generation`**. Same set as
+  `supabase.public.ai_runs.flow_type` — the two constraints are maintained
+  together in one migration each time the set changes. See Warnings — this doc
+  previously listed 11.
 - `action_type` (nullable) — for block-level flows, DB-constrained to
   **`rewrite`, `summarize`, `improve`, `ats_optimize`, `options`, `expand`,
   `shorten`**. `null` when the flow is not block-scoped.
@@ -66,6 +71,12 @@ and the prompt version it used.
 
 ## Warnings
 
+- **`flow_type` was documented as an 11-value set; the DB admits 13.** The two
+  missing values are `professional_summary`, added by the phase-11 migration on
+  **2026-06-03**, and `skills_pool`, added by phase 14 on **2026-08-01**. The
+  11-value list was correct when written (it matched the 2026-04-29 constraint)
+  and went stale in two steps after it. A prompt-coverage audit built on the old
+  list will report full coverage while both new flows are missing prompt rows.
 - **No run→prompt linkage** — you cannot join a specific `ai_run` to the exact
   prompt row it resolved; only the flow/provider/model are recorded on the run.
 - `system_prompt`/`user_prompt_template` are free text; no structure to decode.

@@ -1,8 +1,8 @@
 ---
 doc_class: human-object
 object: supabase.public.ai_runs
-written_against_schema_hash: "sha256:1371cc0551146b3167888b67d16ddbf8c054f90222a4cb07b3312d9a18a89497"
-status: contaminated
+written_against_schema_hash: "sha256:a1d393bf52a05c21597853ebf1a04de62392198342bb2a85f6c736590e258b3c"
+status: draft
 last_verified: null
 purpose: "A single AI model invocation capturing the flow, provider, payloads, token usage, and progress of a generation request."
 column_purposes:
@@ -28,6 +28,8 @@ column_purposes:
 sources:
   - "customer doc: cv-data-model-kb/CV_data_tool/tables/ai_runs.md"
   - "app DDL: CV_Builder/backend/supabase/migrations (ai_runs_flow_type_check, ai_runs_status_check, ai_runs_progress_stage_check, completion-consistency check)"
+  - "app DDL: CV_Builder/backend/supabase/migrations/20260603160000_phase11_parallel_import_improve.sql (flow_type + professional_summary)"
+  - "app DDL: CV_Builder/backend/supabase/migrations/20260801120000_phase14_skills_pool_prompt_flow.sql (flow_type + skills_pool; the operative constraint)"
   - "app code: CV_Builder/backend/src (per-flow input_payload builders, typed Record<string, unknown>)"
   - "machine doc: supabase.public.ai_runs"
 depends_on:
@@ -36,7 +38,8 @@ depends_on:
   - supabase.public.tailored_cvs
   - supabase.public.jobs
   - supabase.public.ai_suggestions
-contamination: {object: "supabase.public.ai_runs", change: "stat_changed", detail: "stat_changed: checks"}
+  - supabase.public.ai_prompt_configs
+contamination: null
 ---
 
 # `supabase.public.ai_runs`
@@ -50,9 +53,12 @@ flows). A consistency CHECK ties termination to timing: `completed_at` is set
 
 ## Column meanings & enum decodings
 
-- `flow_type` — DB-constrained to the 11-value set shared with
-  `supabase.public.ai_prompt_configs.flow_type` (`job_analysis` …
-  `cover_letter_generation`).
+- `flow_type` — DB-constrained (`ai_runs_flow_type_check`) to the **13-value**
+  set shared with `supabase.public.ai_prompt_configs.flow_type`:
+  **`job_analysis`, `follow_up_questions`, `tailored_draft`, `block_suggest`,
+  `skills_pool`, `block_compare`, `multi_option`, `import_improve`,
+  `professional_summary`, `summary`, `improve`, `cv_parse`,
+  `cover_letter_generation`**. See Warnings — this doc previously listed 11.
 - `status` — DB-constrained to **`pending` | `completed` | `failed`**.
 - `progress_stage` — DB-constrained to **`queued`, `building_prompt`,
   `calling_model`, `parsing_output`, `validating_output`, `persisting_result`,
@@ -84,6 +90,13 @@ flows). A consistency CHECK ties termination to timing: `completed_at` is set
 
 ## Warnings
 
+- **`flow_type` was documented as an 11-value set; the DB admits 13.** The two
+  missing values are `professional_summary`, added by the phase-11 migration on
+  **2026-06-03**, and `skills_pool`, added by phase 14 on **2026-08-01**. The
+  11-value list was correct when written (it matched the 2026-04-29 constraint)
+  and went stale in two steps after it. Reports that enumerate flows from the
+  old list — or that treat it as exhaustive in a `CASE`/`IN` filter — silently
+  drop both flows rather than erroring.
 - Payload structure is flow-dependent — do not assume shared keys across
   `flow_type`s (gap above).
 - `input_tokens`/`output_tokens`/`total_tokens` are nullable — treat null as
