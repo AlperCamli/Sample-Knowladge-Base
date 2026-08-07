@@ -2,8 +2,8 @@
 doc_class: human-object
 object: supabase.public.subscriptions
 written_against_schema_hash: "sha256:aa2bf4a4a88ec655bbb5e0ff78af326ac6c5f20da62f6803cfaa4940fb8c5972"
-status: contaminated
-last_verified: null
+status: verified
+last_verified: "2026-08-07 (Alper Camli)"
 purpose: "Billing subscription records linking a user to an external payment-provider plan and its lifecycle state."
 column_purposes:
   id: "Internal subscription id."
