@@ -23,28 +23,28 @@ status: machine
 
 | # | Column | Type | Nullable | Default | Description | Purpose |
 |---|---|---|---|---|---|---|
-| 1 | `month` | `date` | true | — | — | — |
-| 2 | `days_in_month` | `bigint` | true | — | — | — |
-| 3 | `active_days` | `bigint` | true | — | — | — |
-| 4 | `jobs_created` | `numeric` | true | — | — | — |
-| 5 | `cvs_tailored` | `numeric` | true | — | — | — |
-| 6 | `exports_created` | `numeric` | true | — | — | — |
-| 7 | `ai_runs_started` | `numeric` | true | — | — | — |
-| 8 | `total_tokens` | `numeric` | true | — | — | — |
-| 9 | `ai_non_completed` | `numeric` | true | — | — | — |
-| 10 | `tailored_cvs` | `numeric` | true | — | — | — |
-| 11 | `tailored_deleted` | `numeric` | true | — | — | — |
-| 12 | `job_count` | `bigint` | true | — | — | — |
-| 13 | `job_users` | `bigint` | true | — | — | — |
-| 14 | `applied_count` | `bigint` | true | — | — | — |
-| 15 | `new_subscriptions` | `numeric` | true | — | — | — |
-| 16 | `cohort_users` | `numeric` | true | — | — | — |
-| 17 | `onboarded` | `numeric` | true | — | — | — |
-| 18 | `signed_up` | `bigint` | true | — | — | — |
-| 19 | `created_master_cv` | `bigint` | true | — | — | — |
-| 20 | `created_tailored_cv` | `bigint` | true | — | — | — |
-| 21 | `exported` | `bigint` | true | — | — | — |
-| 22 | `subscribed` | `bigint` | true | — | — | — |
+| 1 | `month` | `date` | true | — | — | First day of the month, from the activity spine. |
+| 2 | `days_in_month` | `bigint` | true | — | — | Spine days present in this month — not the calendar length; partial in the first and current months. |
+| 3 | `active_days` | `bigint` | true | — | — | Spine days in the month with at least one job, tailored CV, export or AI run. |
+| 4 | `jobs_created` | `numeric` | true | — | — | Job postings created during the month. |
+| 5 | `cvs_tailored` | `numeric` | true | — | — | Tailored CVs created during the month. |
+| 6 | `exports_created` | `numeric` | true | — | — | Export jobs created during the month. |
+| 7 | `ai_runs_started` | `numeric` | true | — | — | AI runs started during the month. |
+| 8 | `total_tokens` | `numeric` | true | — | — | Billed AI tokens across all providers for runs started in the month. |
+| 9 | `ai_non_completed` | `numeric` | true | — | — | Runs started in the month whose status is anything other than `completed`. |
+| 10 | `tailored_cvs` | `numeric` | true | — | — | Tailored CVs created in the month, counted from the CV-production view including soft-deleted ones. |
+| 11 | `tailored_deleted` | `numeric` | true | — | — | How many of `tailored_cvs` are now flagged `is_deleted` — a current flag, not a deletion in that month. |
+| 12 | `job_count` | `bigint` | true | — | — | Job postings created in the month, counted independently of `jobs_created` — see Warnings. |
+| 13 | `job_users` | `bigint` | true | — | — | Distinct users who created a job that month; not additive across months. |
+| 14 | `applied_count` | `bigint` | true | — | — | Jobs created that month that now have a non-null `applied_at` — current state, not an in-month event. |
+| 15 | `new_subscriptions` | `numeric` | true | — | — | Subscription records created in the month, UTC-bucketed — see Warnings on the timezone split. |
+| 16 | `cohort_users` | `numeric` | true | — | — | Users who signed up in the month, from the cohorts view — contradicts `signed_up`, see Warnings. |
+| 17 | `onboarded` | `numeric` | true | — | — | Users in that signup cohort who have completed onboarding, as of now. |
+| 18 | `signed_up` | `bigint` | true | — | — | Cohort size: users who signed up in the month, UTC-bucketed — the funnel's base. |
+| 19 | `created_master_cv` | `bigint` | true | — | — | Cohort users with a non-deleted master CV created before the month ended. |
+| 20 | `created_tailored_cv` | `bigint` | true | — | — | Cohort users with a non-deleted tailored CV created before the month ended. |
+| 21 | `exported` | `bigint` | true | — | — | Cohort users with a completed export created before the month ended. |
+| 22 | `subscribed` | `bigint` | true | — | — | Cohort users with any subscription record created before the month ended. |
 
 ## Keys & indexes
 

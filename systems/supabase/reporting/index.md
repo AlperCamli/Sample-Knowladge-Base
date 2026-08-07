@@ -11,7 +11,7 @@ status: machine
 
 # supabase — schema `reporting`
 
-21 objects · 17 with human docs.
+21 objects · 21 with human docs.
 
 | Object | Kind | Machine doc | Human doc | Status | Purpose |
 |---|---|---|---|---|---|
@@ -27,10 +27,10 @@ status: machine
 | `v_job_status_transitions` | view | [v_job_status_transitions.schema.md](v_job_status_transitions.schema.md) | [v_job_status_transitions.md](v_job_status_transitions.md) | contaminated | Daily counts of job-application status transitions — the source for a transition matrix. |
 | `v_jobs_by_month` | view | [v_jobs_by_month.schema.md](v_jobs_by_month.schema.md) | [v_jobs_by_month.md](v_jobs_by_month.md) | contaminated | Monthly job-tracking volume: postings created per month, how many users created them, and how many reached the applied stage. |
 | `v_jobs_by_status` | view | [v_jobs_by_status.schema.md](v_jobs_by_status.schema.md) | [v_jobs_by_status.md](v_jobs_by_status.md) | contaminated | Job-application pipeline size by status: how many tracked postings sit in each stage, over how many users, and the date range each stage spans. |
-| `v_mart_dim_ai_flow` | view | [v_mart_dim_ai_flow.schema.md](v_mart_dim_ai_flow.schema.md) | — | — | — |
-| `v_mart_dim_breakouts` | view | [v_mart_dim_breakouts.schema.md](v_mart_dim_breakouts.schema.md) | — | — | — |
-| `v_mart_fact_daily` | view | [v_mart_fact_daily.schema.md](v_mart_fact_daily.schema.md) | — | — | — |
-| `v_mart_fact_monthly` | view | [v_mart_fact_monthly.schema.md](v_mart_fact_monthly.schema.md) | — | — | — |
+| `v_mart_dim_ai_flow` | view | [v_mart_dim_ai_flow.schema.md](v_mart_dim_ai_flow.schema.md) | [v_mart_dim_ai_flow.md](v_mart_dim_ai_flow.md) | draft | Unfiltered pass-through of `v_ai_runs_by_flow` — the AI-flow dimension of the mart layer. |
+| `v_mart_dim_breakouts` | view | [v_mart_dim_breakouts.schema.md](v_mart_dim_breakouts.schema.md) | [v_mart_dim_breakouts.md](v_mart_dim_breakouts.md) | draft | Six unrelated category breakdowns stacked into one long table, discriminated by `dim`; rows from different `dim` values are not comparable. |
+| `v_mart_fact_daily` | view | [v_mart_fact_daily.schema.md](v_mart_fact_daily.schema.md) | [v_mart_fact_daily.md](v_mart_fact_daily.md) | draft | One row per day on the activity spine, joining signups, the four core actions, AI run outcomes and job transitions into a single daily fact row. |
+| `v_mart_fact_monthly` | view | [v_mart_fact_monthly.schema.md](v_mart_fact_monthly.schema.md) | [v_mart_fact_monthly.md](v_mart_fact_monthly.md) | draft | One row per month combining in-month activity totals with signup-cohort outcomes — two different grains side by side, see Warnings before comparing columns. |
 | `v_master_cvs_by_language` | view | [v_master_cvs_by_language.schema.md](v_master_cvs_by_language.schema.md) | [v_master_cvs_by_language.md](v_master_cvs_by_language.md) | contaminated | Active master-CV inventory by language and how it was created (uploaded, built, imported). |
 | `v_subscriptions_by_plan` | view | [v_subscriptions_by_plan.schema.md](v_subscriptions_by_plan.schema.md) | [v_subscriptions_by_plan.md](v_subscriptions_by_plan.md) | draft | Subscription mix by plan and status, with pending cancellations. |
 | `v_subscriptions_new_by_month` | view | [v_subscriptions_new_by_month.schema.md](v_subscriptions_new_by_month.schema.md) | [v_subscriptions_new_by_month.md](v_subscriptions_new_by_month.md) | draft | Subscription records created per UTC month and status — counts of records, never revenue. |
