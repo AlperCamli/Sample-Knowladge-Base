@@ -1,6 +1,6 @@
 ---
 doc_class: entity
-status: contaminated
+status: draft
 last_verified: null
 aliases: [account, member, customer]
 maps:
@@ -14,7 +14,7 @@ sources:
 depends_on:
   - supabase.public.users
   - ga4.standard.signedInWithUserId
-contamination: {object: "supabase.public.users", change: "stat_changed", detail: "stat_changed: checks"}
+contamination: null
 ---
 
 # user

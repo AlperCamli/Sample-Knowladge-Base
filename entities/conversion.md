@@ -1,6 +1,6 @@
 ---
 doc_class: entity
-status: contaminated
+status: draft
 last_verified: null
 aliases: [purchase, paid conversion, key event]
 maps:
@@ -21,7 +21,7 @@ depends_on:
   - supabase.public.exports
   - supabase.public.tailored_cvs
   - supabase.public.users
-contamination: {object: "supabase.public.exports", change: "stat_changed", detail: "stat_changed: checks"}
+contamination: null
 ---
 
 # conversion
