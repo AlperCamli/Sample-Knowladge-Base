@@ -26,7 +26,6 @@ sources:
   - "observed, 2026-08-07: SELECT plan_code, status, count(*) FROM public.subscriptions GROUP BY 1,2 returned 0 rows"
 depends_on:
   - supabase.public.users
-contamination: {object: "supabase.public.users", change: "stat_changed", detail: "stat_changed: checks"}
 ---
 
 # `supabase.public.subscriptions`
