@@ -31,5 +31,4 @@ status: machine
 | `exports` | table | [exports.schema.md](exports.schema.md) | [exports.md](exports.md) | draft | Export job records for rendering a tailored CV or master CV into a downloadable PDF or DOCX artifact. |
 | `files` | table | [files.schema.md](files.schema.md) | [files.md](files.md) | draft | Metadata records for binary objects stored in Supabase storage buckets, owned by users. |
 | `imports` | table | [imports.schema.md](imports.schema.md) | [imports.md](imports.md) | draft | Pipeline records tracking the parse of an uploaded source CV file into structured content for a master CV. |
-| `subscriptions` | table | [subscriptions.schema.md](subscriptions.schema.md) | [subscriptions.md](subscriptions.md) | draft | Billing subscription records linking a user to an external payment-provider plan and its lifecycle state. |
 | `usage_counters` | table | [usage_counters.schema.md](usage_counters.schema.md) | [usage_counters.md](usage_counters.md) | draft | Per-user monthly counters tracking AI, generation, export, and storage consumption against plan entitlements. |
