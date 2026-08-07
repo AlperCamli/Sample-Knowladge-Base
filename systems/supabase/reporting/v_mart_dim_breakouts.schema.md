@@ -23,13 +23,13 @@ status: machine
 
 | # | Column | Type | Nullable | Default | Description | Purpose |
 |---|---|---|---|---|---|---|
-| 1 | `dim` | `text` | true | — | — | — |
-| 2 | `key1` | `text` | true | — | — | — |
-| 3 | `key2` | `text` | true | — | — | — |
-| 4 | `item_count` | `bigint` | true | — | — | — |
-| 5 | `user_count` | `bigint` | true | — | — | — |
-| 6 | `total_bytes` | `numeric` | true | — | — | — |
-| 7 | `cancelling_count` | `bigint` | true | — | — | — |
+| 1 | `dim` | `text` | true | — | — | Which breakdown the row belongs to; closed set of six values — see body. Always filter on this first. |
+| 2 | `key1` | `text` | true | — | — | Primary category of the breakdown; means a different thing per `dim` — see body. |
+| 3 | `key2` | `text` | true | — | — | Secondary category, or null where the breakdown has only one — see body. |
+| 4 | `item_count` | `bigint` | true | — | — | Count of the thing being broken out; the unit differs per `dim` — see body. |
+| 5 | `user_count` | `bigint` | true | — | — | Distinct users behind the row; null for `subscriptions_by_plan`, and never additive — see Warnings. |
+| 6 | `total_bytes` | `numeric` | true | — | — | Stored bytes; populated only for `dim = 'files_by_type'`, null everywhere else. |
+| 7 | `cancelling_count` | `bigint` | true | — | — | Subscriptions set to cancel at period end; populated only for `dim = 'subscriptions_by_plan'`. |
 
 ## Keys & indexes
 

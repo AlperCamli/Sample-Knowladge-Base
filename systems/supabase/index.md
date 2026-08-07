@@ -17,7 +17,7 @@ System class: sql · 38 objects across 2 schemas.
 | Schema | Objects | Human docs | Index | Purpose |
 |---|---|---|---|---|
 | `public` | 17 | 17 | [public/index.md](public/index.md) | — |
-| `reporting` | 21 | 17 | [reporting/index.md](reporting/index.md) | — |
+| `reporting` | 21 | 21 | [reporting/index.md](reporting/index.md) | — |
 
 ## Source properties
 

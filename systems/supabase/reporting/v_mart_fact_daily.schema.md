@@ -23,16 +23,16 @@ status: machine
 
 | # | Column | Type | Nullable | Default | Description | Purpose |
 |---|---|---|---|---|---|---|
-| 1 | `day` | `date` | true | — | — | — |
-| 2 | `new_users` | `bigint` | true | — | — | — |
-| 3 | `jobs_created` | `bigint` | true | — | — | — |
-| 4 | `cvs_tailored` | `bigint` | true | — | — | — |
-| 5 | `exports_created` | `bigint` | true | — | — | — |
-| 6 | `ai_runs_started` | `bigint` | true | — | — | — |
-| 7 | `ai_completed` | `numeric` | true | — | — | — |
-| 8 | `ai_failed` | `numeric` | true | — | — | — |
-| 9 | `ai_pending` | `numeric` | true | — | — | — |
-| 10 | `job_transitions` | `numeric` | true | — | — | — |
+| 1 | `day` | `date` | true | — | — | Spine date. Runs from the first job ever created to today — see Warnings, the spine is not the calendar. |
+| 2 | `new_users` | `bigint` | true | — | — | Accounts created that day, UTC-bucketed; 0 where no signups matched — see Warnings on the timezone split. |
+| 3 | `jobs_created` | `bigint` | true | — | — | Job postings created that day. |
+| 4 | `cvs_tailored` | `bigint` | true | — | — | Tailored CVs created that day. |
+| 5 | `exports_created` | `bigint` | true | — | — | Export jobs created that day. |
+| 6 | `ai_runs_started` | `bigint` | true | — | — | AI runs started that day. |
+| 7 | `ai_completed` | `numeric` | true | — | — | Runs *started* that day whose status is now `completed` — not completions on that day. |
+| 8 | `ai_failed` | `numeric` | true | — | — | Runs *started* that day whose status is now `failed`. |
+| 9 | `ai_pending` | `numeric` | true | — | — | Runs *started* that day still `pending` — a running total that shrinks as they finish. |
+| 10 | `job_transitions` | `numeric` | true | — | — | Job-application status changes recorded that day. |
 
 ## Keys & indexes
 
