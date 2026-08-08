@@ -1,0 +1,43 @@
+# Auditor profile (CP-Phase-2 / B-4) — the read-everything,
+# touch-nothing role. Bound to R4 in roles.yaml (OIDC group `auditor`).
+#
+# This profile exists so that the *server* knows the role before any
+# view does (dashboard spec UI-4). The dashboard never names a role: it
+# asks the server what this caller may read, and the server answers from
+# this file and roles.yaml. Remove the pair and the Audit view goes dark
+# with no code change — which is what conformance test DT-7 checks.
+#
+# What it grants: nothing callable. `tools.allow` is deliberately EMPTY,
+# and that is the whole security statement. An auditor's session can
+# open an MCP connection under this profile and every tool call is
+# denied by the same (roles ∩ allowlist) evaluation that governs every
+# other profile (M-3, MCP-R1/R2/R4) — no new refusal was written for
+# this role, so there is no new refusal to forget. Read access to the
+# knowledge base comes from `visibility: ["**"]` on the roles.yaml entry,
+# which is the existing map applied to every content response (M-4).
+#
+# What it is NOT: a client configuration. An empty allowlist compiles to
+# a setup bundle that could call nothing, so the server does not offer
+# one for this profile — a pure auditor asking for a bundle gets
+# `no_profile_binding` (403), which is the role→view matrix's "—" for
+# U-2 and U-3 arriving as a server answer rather than a hidden button.
+# An identity holding this profile *and* an agent profile (reporter,
+# say) still downloads that one, unambiguously.
+#
+# Read scope on the dashboard's governed reads is decided by the server
+# from this profile's name: audit rows (U-12, "full, read-only"),
+# publish deliveries (U-9, "all"), the ledger queue (U-5, "read"),
+# connections and run health (U-1/U-8/U-10, "read"). Every write gate on
+# those surfaces asks for `steward` or an ops role and was not touched,
+# so read-only here is a property of what this profile was never added
+# to — not of a check somebody remembered to write.
+name: Auditor
+description: Read-only oversight — the audit trail, deliveries, the ledger queue; no tool, no write
+roles: [auditor]               # OIDC group permitted to bind this profile
+skills: []                     # no session skills: this role's surface is the dashboard
+tools:
+  allow: []                    # empty by design — see above; not an omission
+# No `limits`: guardrails bound what an execute may do, and this profile
+# cannot execute. An empty map rather than invented numbers, for the same
+# reason the Benchmarks view ships dark rather than showing a zero.
+limits: {}
