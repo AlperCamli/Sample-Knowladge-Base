@@ -45,4 +45,4 @@ context:
 # Matches conventions.md query guardrails (direct-on-OLTP mandate).
 # These are injected server-side into every execute (MCP-R8): the client
 # never supplies guardrails, and anything it sends is discarded.
-limits: { row_cap: 50000, timeout_s: 60 }
+limits: { row_cap: 25000, timeout_s: 60 }
