@@ -41,11 +41,21 @@ roles:
     oidc_group: ops
     visibility: ["**"]
 
+  # Declared at CP-4 with `profile: null` and the note "read/audit
+  # surface only" — a persona with nothing behind it, because the audit
+  # surface did not exist yet. Checkpoint B-4 is where it gets its
+  # binding, and the server never learns the role from anywhere else:
+  # delete this entry and the Audit view goes dark again for everyone,
+  # with no code change (dashboard spec UI-4, conformance DT-7).
+  #
+  # `oidc_group` moves from the never-issued placeholder `security` to
+  # `auditor`, which is the group the IdP actually grants and the name
+  # the profile below answers to. No identity ever held `security`.
   R4:
-    title: Security / compliance reviewer
-    profile: null               # read/audit surface only; no agent profile
+    title: Security / compliance reviewer (auditor)
+    profile: auditor            # read/audit surface only; grants no tool
     identity: AlperCamli
-    oidc_group: security
+    oidc_group: auditor
     visibility: ["**"]
 
   R5:
